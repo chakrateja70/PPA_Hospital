@@ -1,0 +1,1802 @@
+{
+    "version": "7.3",
+    "data_api_version": "3.0",
+    "routing_model": {
+        "SERVICES": [
+            "APPOINTMENT",
+            "DOCTOR_OPD",
+            "LAB_REPORTS",
+            "AI_ASSISTANCE",
+            "HOSPITAL_INFO",
+            "EMERGENCY_VIDEOS",
+            "AUDIO_GUIDANCE"
+        ],
+        "APPOINTMENT": [
+            "DETAILS"
+        ],
+        "DETAILS": [
+            "SUMMARY"
+        ],
+        "SUMMARY": [
+            "TERMS"
+        ],
+        "TERMS": [],
+        "DOCTOR_OPD": [
+            "DOCTOR_OPD_RESULT"
+        ],
+        "DOCTOR_OPD_RESULT": [],
+        "LAB_REPORTS": [
+            "LAB_REPORT_VIEW"
+        ],
+        "LAB_REPORT_VIEW": [],
+        "AI_ASSISTANCE": [
+            "AI_RESPONSE"
+        ],
+        "AI_RESPONSE": [],
+        "HOSPITAL_INFO": [
+            "HOSPITAL_DETAIL"
+        ],
+        "HOSPITAL_DETAIL": [],
+        "EMERGENCY_VIDEOS": [],
+        "AUDIO_GUIDANCE": []
+    },
+    "screens": [
+        {
+            "id": "SERVICES",
+            "title": "Our Services",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "NavigationList",
+                        "name": "services_nav",
+                        "list-items": [
+                            {
+                                "id": "appointment_booking",
+                                "main-content": {
+                                    "title": "Appointment Booking",
+                                    "metadata": "Book an appointment with a doctor"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "APPOINTMENT"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "doctor_opd",
+                                "main-content": {
+                                    "title": "Doctor & OPD Information",
+                                    "metadata": "Find doctors and OPD timings"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "DOCTOR_OPD"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "lab_reports",
+                                "main-content": {
+                                    "title": "Lab Reports",
+                                    "metadata": "Access your diagnostic lab reports"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "LAB_REPORTS"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "ai_assistance",
+                                "main-content": {
+                                    "title": "AI Assistance",
+                                    "metadata": "Get AI-powered health guidance"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "AI_ASSISTANCE"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "hospital_info",
+                                "main-content": {
+                                    "title": "General Hospital Information",
+                                    "metadata": "Find address, phone & specialties of govt. hospitals"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "HOSPITAL_INFO"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "emergency_videos",
+                                "main-content": {
+                                    "title": "Emergency Videos",
+                                    "metadata": "Watch first-aid guides for emergencies"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "EMERGENCY_VIDEOS"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "audio_guidance",
+                                "main-content": {
+                                    "title": "Audio Guidance",
+                                    "metadata": "Ask your health query by voice in any language"
+                                },
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "service": "AUDIO_GUIDANCE"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "APPOINTMENT",
+            "title": "Appointment",
+            "data": {
+                "department": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "cardiology",
+                            "title": "Cardiology",
+                            "description": "Heart care, BP, ECG & chest pain treatment"
+                        },
+                        {
+                            "id": "urology",
+                            "title": "Urology",
+                            "description": "Kidney, urinary tract & bladder care"
+                        },
+                        {
+                            "id": "neurology",
+                            "title": "Neurology",
+                            "description": "Brain, nerves, migraine & stroke care"
+                        },
+                        {
+                            "id": "orthopedics",
+                            "title": "Orthopedics",
+                            "description": "Bones, joints, fractures & arthritis care"
+                        },
+                        {
+                            "id": "dermatology",
+                            "title": "Dermatology",
+                            "description": "Skin, hair, nail & allergy treatments"
+                        },
+                        {
+                            "id": "ent",
+                            "title": "ENT",
+                            "description": "Ear, nose, throat & sinus care"
+                        },
+                        {
+                            "id": "ophthalmology",
+                            "title": "Ophthalmology",
+                            "description": "Eye care, vision testing & cataract treatment"
+                        },
+                        {
+                            "id": "gastroenterology",
+                            "title": "Gastroenterology",
+                            "description": "Digestive system, stomach & liver care"
+                        },
+                        {
+                            "id": "pulmonology",
+                            "title": "Pulmonology",
+                            "description": "Lung, breathing & respiratory care"
+                        },
+                        {
+                            "id": "nephrology",
+                            "title": "Nephrology",
+                            "description": "Kidney disease & dialysis care"
+                        },
+                        {
+                            "id": "oncology",
+                            "title": "Oncology",
+                            "description": "Cancer diagnosis, treatment & care"
+                        },
+                        {
+                            "id": "psychiatry",
+                            "title": "Psychiatry",
+                            "description": "Mental health, stress & depression care"
+                        },
+                        {
+                            "id": "general_medicine",
+                            "title": "General Medicine",
+                            "description": "Fever, infections & general health checkups"
+                        },
+                        {
+                            "id": "general_surgery",
+                            "title": "General Surgery",
+                            "description": "Surgical consultations & procedures"
+                        },
+                        {
+                            "id": "gynecology",
+                            "title": "Gynecology & Obstetrics",
+                            "description": "Women's health, pregnancy & reproductive care"
+                        },
+                        {
+                            "id": "pediatrics",
+                            "title": "Pediatrics",
+                            "description": "Child healthcare, growth & vaccinations"
+                        },
+                        {
+                            "id": "endocrinology",
+                            "title": "Endocrinology",
+                            "description": "Diabetes, thyroid & hormone care"
+                        },
+                        {
+                            "id": "rheumatology",
+                            "title": "Rheumatology",
+                            "description": "Arthritis, joint pain & autoimmune disorders"
+                        },
+                        {
+                            "id": "plastic_surgery",
+                            "title": "Plastic Surgery",
+                            "description": "Cosmetic, reconstructive & skin procedures"
+                        },
+                        {
+                            "id": "dental",
+                            "title": "Dental",
+                            "description": "Teeth cleaning, cavities & oral care"
+                        },
+                        {
+                            "id": "neonatology",
+                            "title": "Neonatology",
+                            "description": "Newborn care & intensive neonatal unit"
+                        },
+                        {
+                            "id": "pediatric_surgery",
+                            "title": "Pediatric Surgery",
+                            "description": "Surgical procedures for children"
+                        },
+                        {
+                            "id": "critical_care",
+                            "title": "Critical Care",
+                            "description": "ICU & emergency intensive care"
+                        },
+                        {
+                            "id": "radiation_therapy",
+                            "title": "Radiation Therapy",
+                            "description": "Cancer radiation & radiotherapy treatment"
+                        },
+                        {
+                            "id": "chemotherapy",
+                            "title": "Chemotherapy",
+                            "description": "Cancer drug therapy & infusion treatment"
+                        },
+                        {
+                            "id": "palliative_care",
+                            "title": "Palliative Care",
+                            "description": "Comfort & end-of-life symptom care"
+                        },
+                        {
+                            "id": "infectious_diseases",
+                            "title": "Infectious Diseases",
+                            "description": "Infections, fever & tropical disease treatment"
+                        },
+                        {
+                            "id": "tuberculosis",
+                            "title": "Tuberculosis",
+                            "description": "TB diagnosis, DOTS therapy & chest infections"
+                        },
+                        {
+                            "id": "preventive_medicine",
+                            "title": "Preventive Medicine",
+                            "description": "Immunization, screening & public health"
+                        },
+                        {
+                            "id": "unani_medicine",
+                            "title": "Unani Medicine",
+                            "description": "Traditional Unani holistic treatment"
+                        },
+                        {
+                            "id": "ayurvedic_medicine",
+                            "title": "Ayurvedic Medicine",
+                            "description": "Ayurvedic treatments & herbal therapies"
+                        },
+                        {
+                            "id": "homeopathy",
+                            "title": "Homeopathy",
+                            "description": "Homeopathic consultation & treatment"
+                        }
+                    ]
+                },
+                "district": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "adilabad",
+                            "title": "Adilabad"
+                        },
+                        {
+                            "id": "bhadradri_kothagudem",
+                            "title": "Bhadradri Kothagudem"
+                        },
+                        {
+                            "id": "hanumakonda",
+                            "title": "Hanumakonda"
+                        },
+                        {
+                            "id": "hyderabad",
+                            "title": "Hyderabad"
+                        },
+                        {
+                            "id": "jagitial",
+                            "title": "Jagitial"
+                        },
+                        {
+                            "id": "jayashankar_bhupalpally",
+                            "title": "Jayashankar Bhupalpally"
+                        },
+                        {
+                            "id": "kamareddy",
+                            "title": "Kamareddy"
+                        },
+                        {
+                            "id": "karimnagar",
+                            "title": "Karimnagar"
+                        },
+                        {
+                            "id": "khammam",
+                            "title": "Khammam"
+                        },
+                        {
+                            "id": "kumrambheem_asifabad",
+                            "title": "Kumuram Bheem Asifabad"
+                        },
+                        {
+                            "id": "mahabubabad",
+                            "title": "Mahabubabad"
+                        },
+                        {
+                            "id": "medak",
+                            "title": "Medak"
+                        },
+                        {
+                            "id": "mulugu",
+                            "title": "Mulugu"
+                        },
+                        {
+                            "id": "nagarkurnool",
+                            "title": "Nagarkurnool"
+                        },
+                        {
+                            "id": "nalgonda",
+                            "title": "Nalgonda"
+                        },
+                        {
+                            "id": "narayanpet",
+                            "title": "Narayanpet"
+                        },
+                        {
+                            "id": "nirmal",
+                            "title": "Nirmal"
+                        },
+                        {
+                            "id": "nizamabad",
+                            "title": "Nizamabad"
+                        },
+                        {
+                            "id": "peddapalli",
+                            "title": "Peddapalli"
+                        },
+                        {
+                            "id": "rajanna_sircilla",
+                            "title": "Rajanna Sircilla"
+                        },
+                        {
+                            "id": "rangareddy",
+                            "title": "Ranga Reddy"
+                        },
+                        {
+                            "id": "sangareddy",
+                            "title": "Sangareddy"
+                        },
+                        {
+                            "id": "siddipet",
+                            "title": "Siddipet"
+                        },
+                        {
+                            "id": "suryapet",
+                            "title": "Suryapet"
+                        },
+                        {
+                            "id": "vikarabad",
+                            "title": "Vikarabad"
+                        },
+                        {
+                            "id": "yadadri_bhuvanagiri",
+                            "title": "Yadadri Bhuvanagiri"
+                        }
+                    ]
+                },
+                "is_district_enabled": {
+                    "type": "boolean",
+                    "__example__": true,
+                    "description": "Always true — district is always required"
+                },
+                "hospital": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "ogh",
+                            "title": "Osmania General Hospital"
+                        },
+                        {
+                            "id": "gh",
+                            "title": "Gandhi Hospital"
+                        },
+                        {
+                            "id": "nims",
+                            "title": "NIMS"
+                        },
+                        {
+                            "id": "nh",
+                            "title": "Niloufer Hospital"
+                        },
+                        {
+                            "id": "mnj",
+                            "title": "MNJ Institute of Oncology"
+                        },
+                        {
+                            "id": "fh",
+                            "title": "Fever Hospital"
+                        },
+                        {
+                            "id": "gmh",
+                            "title": "Government Maternity Hospital"
+                        },
+                        {
+                            "id": "sbbb",
+                            "title": "SBBB Maternity Hospital"
+                        },
+                        {
+                            "id": "tbch",
+                            "title": "TB & Chest Hospital"
+                        },
+                        {
+                            "id": "ipm",
+                            "title": "Institute of Preventive Medicine"
+                        },
+                        {
+                            "id": "gdch",
+                            "title": "Government Dental College and Hospital"
+                        },
+                        {
+                            "id": "mhe",
+                            "title": "Mental Hospital Erragadda"
+                        },
+                        {
+                            "id": "ngh",
+                            "title": "Nizamia General Hospital"
+                        },
+                        {
+                            "id": "gah_erragadda",
+                            "title": "Government Ayurvedic Hospital Erragadda"
+                        },
+                        {
+                            "id": "gah_charminar",
+                            "title": "Government Ayurvedic Hospital Charminar"
+                        },
+                        {
+                            "id": "golconda_h",
+                            "title": "Golconda Hospital"
+                        },
+                        {
+                            "id": "nampally_h",
+                            "title": "Nampally Hospital"
+                        },
+                        {
+                            "id": "sdeh",
+                            "title": "SD Eye Hospital"
+                        },
+                        {
+                            "id": "ent_kk",
+                            "title": "ENT Hospital King Kothi"
+                        },
+                        {
+                            "id": "stbc",
+                            "title": "State TB Centre Erragadda"
+                        },
+                        {
+                            "id": "hh",
+                            "title": "Homeopathy Hospital"
+                        },
+                        {
+                            "id": "esi_sn",
+                            "title": "ESI Hospital Sanath Nagar"
+                        },
+                        {
+                            "id": "esi_e",
+                            "title": "ESI Hospital Erragadda"
+                        },
+                        {
+                            "id": "rh_sec",
+                            "title": "Railway Hospital Secunderabad"
+                        },
+                        {
+                            "id": "ah_kondapur",
+                            "title": "AH Kondapur"
+                        },
+                        {
+                            "id": "ggch",
+                            "title": "Government General & Chest Hospital"
+                        },
+                        {
+                            "id": "mgm",
+                            "title": "MGM Hospital"
+                        },
+                        {
+                            "id": "gmh_wgl",
+                            "title": "Government Maternity Hospital Warangal"
+                        },
+                        {
+                            "id": "ah_mahabubabad",
+                            "title": "AH Mahabubabad"
+                        },
+                        {
+                            "id": "dh_warangal",
+                            "title": "DH Warangal"
+                        },
+                        {
+                            "id": "ggh_karimnagar",
+                            "title": "Government General Hospital Karimnagar"
+                        },
+                        {
+                            "id": "ah_karimnagar",
+                            "title": "AH Karimnagar"
+                        },
+                        {
+                            "id": "ah_siddipet",
+                            "title": "AH Siddipet"
+                        },
+                        {
+                            "id": "ah_jagityal",
+                            "title": "AH Jagityal"
+                        },
+                        {
+                            "id": "ggh_nizamabad",
+                            "title": "Government General Hospital Nizamabad"
+                        },
+                        {
+                            "id": "gmh_nizamabad",
+                            "title": "Government Maternity Hospital Nizamabad"
+                        },
+                        {
+                            "id": "ggh_khammam",
+                            "title": "Government General Hospital Khammam"
+                        },
+                        {
+                            "id": "ah_kothagudem",
+                            "title": "AH Kothagudem"
+                        },
+                        {
+                            "id": "gmh_khammam",
+                            "title": "Government Maternity Hospital Khammam"
+                        },
+                        {
+                            "id": "ggh_nalgonda",
+                            "title": "Government General Hospital Nalgonda"
+                        },
+                        {
+                            "id": "ah_miryalaguda",
+                            "title": "AH Miryalaguda"
+                        },
+                        {
+                            "id": "dh_mahbubnagar",
+                            "title": "DH Mahbubnagar"
+                        },
+                        {
+                            "id": "ah_gadwal",
+                            "title": "AH Gadwal"
+                        },
+                        {
+                            "id": "chc_shadnagar",
+                            "title": "CHC Shadnagar"
+                        },
+                        {
+                            "id": "dh_adilabad",
+                            "title": "DH Adilabad"
+                        },
+                        {
+                            "id": "ah_mancherial",
+                            "title": "AH Mancherial"
+                        },
+                        {
+                            "id": "ah_nirmal",
+                            "title": "AH Nirmal"
+                        },
+                        {
+                            "id": "rims_adilabad",
+                            "title": "RIMS Hospital Adilabad"
+                        },
+                        {
+                            "id": "ggh_medak",
+                            "title": "Government General Hospital Medak"
+                        },
+                        {
+                            "id": "ah_sangareddy",
+                            "title": "AH Sangareddy"
+                        },
+                        {
+                            "id": "ah_siddipet_medak",
+                            "title": "AH Siddipet Medak"
+                        },
+                        {
+                            "id": "ah_lb_nagar",
+                            "title": "AH LB Nagar"
+                        },
+                        {
+                            "id": "ah_vikarabad",
+                            "title": "AH Vikarabad"
+                        },
+                        {
+                            "id": "chc_tandur",
+                            "title": "CHC Tandur"
+                        },
+                        {
+                            "id": "ggh_suryapet",
+                            "title": "Government General Hospital Suryapet"
+                        },
+                        {
+                            "id": "dh_bhongir",
+                            "title": "DH Bhongir"
+                        },
+                        {
+                            "id": "dh_siddipet",
+                            "title": "DH Siddipet"
+                        },
+                        {
+                            "id": "dh_sircilla",
+                            "title": "DH Sircilla"
+                        },
+                        {
+                            "id": "dh_peddapalli",
+                            "title": "DH Peddapalli"
+                        },
+                        {
+                            "id": "dh_bhupalpally",
+                            "title": "DH Bhupalpally"
+                        },
+                        {
+                            "id": "ah_mulugu",
+                            "title": "AH Mulugu"
+                        },
+                        {
+                            "id": "dh_kothagudem",
+                            "title": "DH Kothagudem"
+                        },
+                        {
+                            "id": "dh_mahabubabad",
+                            "title": "DH Mahabubabad"
+                        },
+                        {
+                            "id": "dh_narayanpet",
+                            "title": "DH Narayanpet"
+                        },
+                        {
+                            "id": "dh_wanaparthy",
+                            "title": "DH Wanaparthy"
+                        },
+                        {
+                            "id": "dh_nagarkurnool",
+                            "title": "DH Nagarkurnool"
+                        },
+                        {
+                            "id": "dh_vikarabad",
+                            "title": "DH Vikarabad"
+                        },
+                        {
+                            "id": "dh_sangareddy",
+                            "title": "DH Sangareddy"
+                        },
+                        {
+                            "id": "dh_kamareddy",
+                            "title": "DH Kamareddy"
+                        },
+                        {
+                            "id": "dh_nirmal",
+                            "title": "DH Nirmal"
+                        },
+                        {
+                            "id": "dh_mancherial",
+                            "title": "DH Mancherial"
+                        },
+                        {
+                            "id": "dh_asifabad",
+                            "title": "DH Asifabad"
+                        }
+                    ]
+                },
+                "is_hospital_enabled": {
+                    "type": "boolean",
+                    "__example__": true
+                },
+                "date": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "2026-06-06",
+                            "title": "Sat Jun 06 2026"
+                        },
+                        {
+                            "id": "2026-06-07",
+                            "title": "Sun Jun 07 2026"
+                        },
+                        {
+                            "id": "2026-06-08",
+                            "title": "Mon Jun 08 2026"
+                        }
+                    ]
+                },
+                "is_date_enabled": {
+                    "type": "boolean",
+                    "__example__": true
+                },
+                "time": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "10:00",
+                            "title": "10:00 AM"
+                        },
+                        {
+                            "id": "10:30",
+                            "title": "10:30 AM"
+                        },
+                        {
+                            "id": "11:00",
+                            "title": "11:00 AM"
+                        },
+                        {
+                            "id": "11:30",
+                            "title": "11:30 AM"
+                        },
+                        {
+                            "id": "12:00",
+                            "title": "12:00 PM"
+                        },
+                        {
+                            "id": "12:30",
+                            "title": "12:30 PM"
+                        },
+                        {
+                            "id": "13:00",
+                            "title": "01:00 PM"
+                        },
+                        {
+                            "id": "13:30",
+                            "title": "01:30 PM"
+                        },
+                        {
+                            "id": "14:00",
+                            "title": "02:00 PM"
+                        },
+                        {
+                            "id": "14:30",
+                            "title": "02:30 PM"
+                        },
+                        {
+                            "id": "15:00",
+                            "title": "03:00 PM"
+                        },
+                        {
+                            "id": "15:30",
+                            "title": "03:30 PM"
+                        },
+                        {
+                            "id": "16:00",
+                            "title": "04:00 PM"
+                        },
+                        {
+                            "id": "16:30",
+                            "title": "04:30 PM"
+                        },
+                        {
+                            "id": "17:00",
+                            "title": "05:00 PM"
+                        },
+                        {
+                            "id": "17:30",
+                            "title": "05:30 PM"
+                        },
+                        {
+                            "id": "18:00",
+                            "title": "06:00 PM"
+                        }
+                    ]
+                },
+                "is_time_enabled": {
+                    "type": "boolean",
+                    "__example__": true
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "appointment_form",
+                        "children": [
+                            {
+                                "type": "Dropdown",
+                                "label": "Department",
+                                "name": "department",
+                                "data-source": "${data.department}",
+                                "required": true,
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "department_selected",
+                                        "department": "${form.department}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Dropdown",
+                                "label": "District",
+                                "name": "district",
+                                "data-source": "${data.district}",
+                                "required": "${data.is_district_enabled}",
+                                "enabled": "${data.is_district_enabled}",
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "district_selected",
+                                        "department": "${form.department}",
+                                        "district": "${form.district}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Dropdown",
+                                "label": "Hospital",
+                                "name": "hospital",
+                                "data-source": "${data.hospital}",
+                                "required": "${data.is_hospital_enabled}",
+                                "enabled": "${data.is_hospital_enabled}",
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "hospital_selected",
+                                        "department": "${form.department}",
+                                        "location": "${form.district}",
+                                        "hospital": "${form.hospital}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Dropdown",
+                                "label": "Date",
+                                "name": "date",
+                                "data-source": "${data.date}",
+                                "required": "${data.is_date_enabled}",
+                                "enabled": "${data.is_date_enabled}",
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "date_selected",
+                                        "department": "${form.department}",
+                                        "district": "${form.district}",
+                                        "hospital": "${form.hospital}",
+                                        "date": "${form.date}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Dropdown",
+                                "label": "Time",
+                                "name": "time",
+                                "data-source": "${data.time}",
+                                "required": "${data.is_time_enabled}",
+                                "enabled": "${data.is_time_enabled}"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Continue",
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "type": "screen",
+                                        "name": "DETAILS"
+                                    },
+                                    "payload": {
+                                        "department": "${form.department}",
+                                        "district": "${form.district}",
+                                        "hospital": "${form.hospital}",
+                                        "date": "${form.date}",
+                                        "time": "${form.time}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DETAILS",
+            "title": "Details",
+            "data": {
+                "department": {
+                    "type": "string",
+                    "__example__": "beauty"
+                },
+                "district": {
+                    "type": "string",
+                    "__example__": "1"
+                },
+                "hospital": {
+                    "type": "string",
+                    "__example__": "dh_mch_king_koti"
+                },
+                "date": {
+                    "type": "string",
+                    "__example__": "2024-01-01"
+                },
+                "time": {
+                    "type": "string",
+                    "__example__": "11:30"
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "details_form",
+                        "children": [
+                            {
+                                "type": "TextInput",
+                                "label": "Name",
+                                "name": "name",
+                                "required": true
+                            },
+                            {
+                                "type": "TextInput",
+                                "label": "Email",
+                                "name": "email",
+                                "input-type": "email",
+                                "required": false
+                            },
+                            {
+                                "type": "TextInput",
+                                "label": "Phone",
+                                "name": "phone",
+                                "input-type": "phone",
+                                "required": true
+                            },
+                            {
+                                "type": "TextArea",
+                                "label": "Further details",
+                                "name": "more_details",
+                                "helper-text": "More details about your visit",
+                                "required": false
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Continue",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "department": "${data.department}",
+                                        "district": "${data.district}",
+                                        "hospital": "${data.hospital}",
+                                        "date": "${data.date}",
+                                        "time": "${data.time}",
+                                        "name": "${form.name}",
+                                        "email": "${form.email}",
+                                        "phone": "${form.phone}",
+                                        "more_details": "${form.more_details}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "SUMMARY",
+            "title": "Summary",
+            "terminal": true,
+            "data": {
+                "appointment": {
+                    "type": "string",
+                    "__example__": "Beauty & Personal Care Department at Kings Cross, London\nMon Jan 01 2024 at 11:30."
+                },
+                "details": {
+                    "type": "string",
+                    "__example__": "Name: John Doe\nEmail: john@example.com\nPhone: 123456789\n\nA free skin care consultation, please"
+                },
+                "department": {
+                    "type": "string",
+                    "__example__": "beauty"
+                },
+                "district": {
+                    "type": "string",
+                    "__example__": "1"
+                },
+                "hospital": {
+                    "type": "string",
+                    "__example__": "dh_mch_king_koti"
+                },
+                "date": {
+                    "type": "string",
+                    "__example__": "2024-01-01"
+                },
+                "time": {
+                    "type": "string",
+                    "__example__": "11:30"
+                },
+                "name": {
+                    "type": "string",
+                    "__example__": "John Doe"
+                },
+                "email": {
+                    "type": "string",
+                    "__example__": "john@example.com"
+                },
+                "phone": {
+                    "type": "string",
+                    "__example__": "123456789"
+                },
+                "more_details": {
+                    "type": "string",
+                    "__example__": "A free skin care consultation, please"
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "confirmation_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "Appointment"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.appointment}"
+                            },
+                            {
+                                "type": "TextHeading",
+                                "text": "Details"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.details}"
+                            },
+                            {
+                                "type": "OptIn",
+                                "name": "terms",
+                                "label": "I agree to the terms",
+                                "required": true,
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "type": "screen",
+                                        "name": "TERMS"
+                                    },
+                                    "payload": {}
+                                }
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Confirm Appointment",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "department": "${data.department}",
+                                        "district": "${data.district}",
+                                        "hospital": "${data.hospital}",
+                                        "date": "${data.date}",
+                                        "time": "${data.time}",
+                                        "name": "${data.name}",
+                                        "email": "${data.email}",
+                                        "phone": "${data.phone}",
+                                        "more_details": "${data.more_details}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "TERMS",
+            "title": "Terms and Conditions",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "TextHeading",
+                        "text": "Our Terms"
+                    },
+                    {
+                        "type": "TextBody",
+                        "text": "By proceeding, you agree that appointments are subject to hospital and doctor availability and are provisional until confirmed. Please arrive 15–30 minutes early with a valid ID, medical records, and pension details if applicable. Ensure all information provided is accurate, as incomplete or incorrect details may lead to cancellation. The hospital reserves the right to reschedule or cancel appointments due to operational reasons without prior notice. This service is for appointment facilitation only and does not provide medical advice or emergency care — for emergencies, visit the nearest hospital immediately. Your personal data will be used solely for appointment and healthcare communication purposes."
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DOCTOR_OPD",
+            "title": "Doctor & OPD Information",
+            "data": {
+                "department": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "cardiology",
+                            "title": "Cardiology"
+                        },
+                        {
+                            "id": "urology",
+                            "title": "Urology"
+                        },
+                        {
+                            "id": "neurology",
+                            "title": "Neurology"
+                        },
+                        {
+                            "id": "orthopedics",
+                            "title": "Orthopedics"
+                        },
+                        {
+                            "id": "dermatology",
+                            "title": "Dermatology"
+                        },
+                        {
+                            "id": "ent",
+                            "title": "ENT"
+                        },
+                        {
+                            "id": "general_medicine",
+                            "title": "General Medicine"
+                        },
+                        {
+                            "id": "general_surgery",
+                            "title": "General Surgery"
+                        },
+                        {
+                            "id": "gynecology",
+                            "title": "Gynecology"
+                        },
+                        {
+                            "id": "pediatrics",
+                            "title": "Pediatrics"
+                        }
+                    ]
+                },
+                "hospital": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "dh_mch_king_koti",
+                            "title": "DH & MCH King Koti"
+                        },
+                        {
+                            "id": "dh_tandur",
+                            "title": "DH Tandur"
+                        },
+                        {
+                            "id": "ah_nampally",
+                            "title": "AH Nampally"
+                        },
+                        {
+                            "id": "ah_malakpet",
+                            "title": "AH Malakpet"
+                        },
+                        {
+                            "id": "ah_golconda",
+                            "title": "AH Golconda"
+                        }
+                    ]
+                },
+                "is_hospital_enabled": {
+                    "type": "boolean",
+                    "__example__": false
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "doctor_opd_form",
+                        "children": [
+                            {
+                                "type": "Dropdown",
+                                "label": "Select Department",
+                                "name": "department",
+                                "data-source": "${data.department}",
+                                "required": true,
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "opd_department_selected",
+                                        "department": "${form.department}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Dropdown",
+                                "label": "Select Hospital",
+                                "name": "hospital",
+                                "data-source": "${data.hospital}",
+                                "required": "${data.is_hospital_enabled}",
+                                "enabled": "${data.is_hospital_enabled}"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Find Doctors",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "find_doctors",
+                                        "department": "${form.department}",
+                                        "hospital": "${form.hospital}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DOCTOR_OPD_RESULT",
+            "title": "Doctor & OPD Details",
+            "terminal": true,
+            "data": {
+                "result_text": {
+                    "type": "string",
+                    "__example__": "🏥 Cardiology OPD\nHospital: Osmania General Hospital\n\nFull OPD details will be sent to your WhatsApp."
+                },
+                "department": {
+                    "type": "string",
+                    "__example__": "cardiology"
+                },
+                "hospital": {
+                    "type": "string",
+                    "__example__": "ogh"
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "doctor_opd_result_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "Doctor & OPD Information"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.result_text}"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Done",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "department": "${data.department}",
+                                        "hospital": "${data.hospital}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "LAB_REPORTS",
+            "title": "Lab Reports",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "lab_reports_form",
+                        "children": [
+                            {
+                                "type": "TextInput",
+                                "label": "Patient ID / Registration Number",
+                                "name": "patient_id",
+                                "required": true,
+                                "helper-text": "Enter your hospital registration number"
+                            },
+                            {
+                                "type": "DatePicker",
+                                "label": "Date of Birth",
+                                "name": "dob",
+                                "required": true,
+                                "helper-text": "Select your date of birth"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "View Reports",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "fetch_lab_reports",
+                                        "patient_id": "${form.patient_id}",
+                                        "dob": "${form.dob}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "LAB_REPORT_VIEW",
+            "title": "Your Lab Reports",
+            "terminal": true,
+            "data": {
+                "report_summary": {
+                    "type": "string",
+                    "__example__": "Patient: John Doe\nReport Date: 05 Jun 2026\n\nComplete Blood Count (CBC)\n- Haemoglobin: 13.5 g/dL (Normal)\n- WBC: 7200 /µL (Normal)\n- Platelets: 2.5 Lac /µL (Normal)"
+                },
+                "patient_name": {
+                    "type": "string",
+                    "__example__": "John Doe"
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "lab_report_view_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "Lab Report"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.report_summary}"
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "For detailed reports, please visit your nearest hospital or contact the lab."
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Done",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "AI_ASSISTANCE",
+            "title": "AI Health Assistance",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "ai_assistance_form",
+                        "children": [
+                            {
+                                "type": "TextSubheading",
+                                "text": "Describe your symptoms or ask a health question"
+                            },
+                            {
+                                "type": "TextArea",
+                                "label": "Your Health Query",
+                                "name": "query",
+                                "required": true,
+                                "helper-text": "e.g. I have a fever for 2 days with headache. What should I do?"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Get AI Guidance",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "ai_query",
+                                        "query": "${form.query}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "AI_RESPONSE",
+            "title": "AI Health Guidance",
+            "terminal": true,
+            "data": {
+                "ai_response": {
+                    "type": "string",
+                    "__example__": "Based on your symptoms (fever and headache for 2 days), here is some general guidance:\n\n1. Stay hydrated - drink plenty of water\n2. Rest adequately\n3. You may take paracetamol for fever relief\n4. If fever exceeds 103°F or persists beyond 3 days, please consult a doctor immediately\n\n⚠️ This is general health information only. For medical advice, please consult a qualified doctor."
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "ai_response_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "AI Health Guidance"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.ai_response}"
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "Disclaimer: This is general health information only and not a substitute for professional medical advice."
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Done",
+                                "on-click-action": {
+                                    "name": "complete",
+                                    "payload": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "HOSPITAL_INFO",
+            "title": "General Hospital Information",
+            "data": {
+                "hospitals": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "ogh,hyderabad",
+                            "title": "Osmania General Hospital, Hyderabad"
+                        },
+                        {
+                            "id": "gh,hyderabad",
+                            "title": "Gandhi Hospital, Hyderabad"
+                        },
+                        {
+                            "id": "nims,hyderabad",
+                            "title": "Nizam's Institute of Medical Sciences (NIMS), Hyderabad"
+                        }
+                    ]
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "hospital_info_form",
+                        "children": [
+                            {
+                                "type": "Dropdown",
+                                "label": "Select Hospital",
+                                "name": "hospital",
+                                "data-source": "${data.hospitals}",
+                                "required": true
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "View Information",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "hospital": "${form.hospital}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "EMERGENCY_VIDEOS",
+            "title": "Emergency First-Aid Videos",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "emergency_videos_form",
+                        "children": [
+                            {
+                                "type": "TextBody",
+                                "text": "Select an emergency guide and we will send the video to your WhatsApp."
+                            },
+                            {
+                                "type": "RadioButtonsGroup",
+                                "label": "Choose Emergency Guide",
+                                "name": "video_id",
+                                "required": true,
+                                "data-source": [
+                                    {
+                                        "id": "cpr",
+                                        "title": "❤️ CPR (Cardiopulmonary Resuscitation)"
+                                    },
+                                    {
+                                        "id": "snake_bite",
+                                        "title": "🐍 Snake Bite Management"
+                                    },
+                                    {
+                                        "id": "burn",
+                                        "title": "🔥 Burn Management"
+                                    },
+                                    {
+                                        "id": "fracture",
+                                        "title": "🦴 Fracture Management"
+                                    },
+                                    {
+                                        "id": "electric_shock",
+                                        "title": "⚡ Electric Shock Management"
+                                    },
+                                    {
+                                        "id": "bites_stings",
+                                        "title": "🦟 Bites and Stings Management"
+                                    },
+                                    {
+                                        "id": "choking",
+                                        "title": "😮 Choking First Aid"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Send Video to WhatsApp",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "video_id": "${form.video_id}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "AUDIO_GUIDANCE",
+            "title": "Audio Guidance",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "audio_guidance_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "🎤 Voice Health Guidance"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "Ask your health question by voice in any language. After you tap Confirm, we'll message you on WhatsApp — just record and send a voice note, and you'll get an audio reply."
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "⚠️ General health information only — not a substitute for professional medical advice."
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Confirm",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "trigger": "audio_confirm"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "HOSPITAL_DETAIL",
+            "title": "Hospital Details",
+            "terminal": true,
+            "data": {
+                "hospital_name": {
+                    "type": "string",
+                    "__example__": "Osmania General Hospital"
+                },
+                "address": {
+                    "type": "string",
+                    "__example__": "Afzal Gunj, Hyderabad – 500012"
+                },
+                "phone": {
+                    "type": "string",
+                    "__example__": "+91-40-24600121"
+                },
+                "specialties": {
+                    "type": "string",
+                    "__example__": "General Medicine, Cardiology, Neurology, Orthopedics, Surgery, Psychiatry"
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "hospital_detail_form",
+                        "children": [
+                            {
+                                "type": "TextHeading",
+                                "text": "${data.hospital_name}"
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "📍 Address"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.address}"
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "📞 Phone"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.phone}"
+                            },
+                            {
+                                "type": "TextSubheading",
+                                "text": "🏥 Specialties"
+                            },
+                            {
+                                "type": "TextBody",
+                                "text": "${data.specialties}"
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Done",
+                                "on-click-action": {
+                                    "name": "complete",
+                                    "payload": {
+                                        "service": "hospital_info",
+                                        "hospital_name": "${data.hospital_name}",
+                                        "address": "${data.address}",
+                                        "phone": "${data.phone}",
+                                        "specialties": "${data.specialties}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
