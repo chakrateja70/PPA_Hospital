@@ -23,24 +23,22 @@ swaps the RAG lookup for a single context-grounded LLM call.
 
 from __future__ import annotations
 
-import os
 import re
 from io import BytesIO
 from typing import Optional, Tuple
 
 import httpx
-from dotenv import load_dotenv
 
-load_dotenv()
+from src.settings import xsettings
 
 # ── Config ───────────────────────────────────────────────────────────────────
-GRAPH_API_TOKEN     = os.getenv("GRAPH_API_TOKEN", "")
-ELEVENLABS_API_KEY  = os.getenv("ELEVENLABS_API_KEY", "")
-ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")  # Rachel – free-tier premade voice
-ELEVENLABS_MODEL_ID = os.getenv("ELEVENLABS_MODEL_ID", "eleven_multilingual_v2")
-ELEVENLABS_STT_MODEL = os.getenv("ELEVENLABS_STT_MODEL", "scribe_v2")
-GROQ_API_KEY        = os.getenv("GROQ_API_KEY", "")
-GROQ_LLM_MODEL      = os.getenv("GROQ_LLM_MODEL", "llama-3.1-8b-instant")
+GRAPH_API_TOKEN      = xsettings.GRAPH_API_TOKEN
+ELEVENLABS_API_KEY   = xsettings.ELEVENLABS_API_KEY
+ELEVENLABS_VOICE_ID  = xsettings.ELEVENLABS_VOICE_ID
+ELEVENLABS_MODEL_ID  = xsettings.ELEVENLABS_MODEL_ID
+ELEVENLABS_STT_MODEL = xsettings.ELEVENLABS_STT_MODEL
+GROQ_API_KEY         = xsettings.GROQ_API_KEY
+GROQ_LLM_MODEL       = xsettings.GROQ_LLM_MODEL
 
 GRAPH_VERSION = "v22.0"
 HTTP_TIMEOUT  = 30
