@@ -365,4 +365,4 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
 
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", reload=False)
+    uvicorn.run("server:app", host="0.0.0.0", reload=True)
