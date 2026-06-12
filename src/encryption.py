@@ -26,9 +26,12 @@ def decrypt_request(body: dict[str, Any], private_pem: str, passphrase: str) -> 
     encrypted_flow_data = body["encrypted_flow_data"]
     initial_vector = body["initial_vector"]
 
-    private_key = serialization.load_pem_private_key(
-        private_pem.encode("utf-8"), password=passphrase.encode("utf-8") if passphrase else None
-    )
+    try:
+        private_key = serialization.load_pem_private_key(
+            private_pem.encode("utf-8"), password=passphrase.encode("utf-8") if passphrase else None
+        )
+    except Exception as error:
+        raise FlowEndpointException(500, "Failed to load private key. Check PRIVATE_KEY and PASSPHRASE in .env.") from error
 
     try:
         decrypted_aes_key = private_key.decrypt(
@@ -50,11 +53,14 @@ def decrypt_request(body: dict[str, Any], private_pem: str, passphrase: str) -> 
     encrypted_flow_data_tag = flow_data_buffer[-tag_length:]
 
     decipher = AESGCM(decrypted_aes_key)
-    decrypted_json_string = decipher.decrypt(
-        initial_vector_buffer,
-        encrypted_flow_data_body + encrypted_flow_data_tag,
-        None,
-    ).decode("utf-8")
+    try:
+        decrypted_json_string = decipher.decrypt(
+            initial_vector_buffer,
+            encrypted_flow_data_body + encrypted_flow_data_tag,
+            None,
+        ).decode("utf-8")
+    except Exception as error:
+        raise FlowEndpointException(421, "Failed to decrypt the request body. AES-GCM tag mismatch.") from error
 
     return {
         "decryptedBody": json.loads(decrypted_json_string),

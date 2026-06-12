@@ -2,7 +2,7 @@
 
 Dispatches incoming Meta webhook events to downstream services by phone_number_id:
 
-  THS_PHONE_NUMBER_ID  →  THS_WEBHOOK_URL
+  PPA_PHONE_NUMBER_ID   →  PPA_WEBHOOK_URL
   APMC_PHONE_NUMBER_ID  →  APMC_WEBHOOK_URL
 
 Add more services by adding new env-var pairs to _routing_pairs below.
@@ -11,6 +11,7 @@ Add more services by adding new env-var pairs to _routing_pairs below.
 from __future__ import annotations
 
 import json
+import logging
 import os
 
 import httpx
@@ -18,20 +19,23 @@ from dotenv import load_dotenv
 from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.responses import PlainTextResponse, Response
 
+logger = logging.getLogger(__name__)
+
 from src.webhook_utils import get_phone_number_id
 
 load_dotenv()
 
 app = FastAPI(title="WhatsApp Webhook Router")
 
-PORT                 = int(os.getenv("PORT", "9000"))
+PORT                 = int(os.getenv("ROUTER_PORT", "9000"))
+FLOW_SERVER_URL      = os.getenv("FLOW_SERVER_URL", "http://localhost:3000")
 WEBHOOK_VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN")
 
 # ── Phone-number → downstream service routing ─────────────────────────────────
 PHONE_TO_SERVICE: dict[str, dict] = {}
 
 _routing_pairs = [
-    ("THS_PHONE_NUMBER_ID", "THS_WEBHOOK_URL", "THS"),
+    ("PPA_PHONE_NUMBER_ID", "PPA_WEBHOOK_URL", "PPA"),
     ("APMC_PHONE_NUMBER_ID", "APMC_WEBHOOK_URL", "APMC"),
 ]
 
@@ -79,6 +83,30 @@ async def health() -> dict:
 @app.get("/")
 async def root() -> PlainTextResponse:
     return PlainTextResponse("WhatsApp Webhook Router — see /health for registered services.")
+
+
+@app.post("/")
+async def flow_proxy(request: Request) -> Response:
+    """Forward WhatsApp Flow requests to src/server.py synchronously."""
+    raw_body = await request.body()
+    fwd_headers = {
+        k: v for k, v in request.headers.items()
+        if k.lower() not in ("host", "content-length")
+    }
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            resp = await client.post(FLOW_SERVER_URL, content=raw_body, headers=fwd_headers)
+        return Response(
+            content=resp.content,
+            status_code=resp.status_code,
+            media_type=resp.headers.get("content-type", "text/plain"),
+        )
+    except httpx.ConnectError:
+        logger.error("Flow server unreachable at %s — is src/server.py running?", FLOW_SERVER_URL)
+        return Response(status_code=503)
+    except httpx.TimeoutException:
+        logger.error("Flow server timed out at %s", FLOW_SERVER_URL)
+        return Response(status_code=504)
 
 
 @app.get("/webhook")

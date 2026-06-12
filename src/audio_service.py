@@ -52,7 +52,7 @@ MAX_TTS_CHARS = 550  # keep ElevenLabs TTS within a sensible quota / length
 # Produces a numbered, emoji-enhanced plain-text response readable on phone.
 AI_TEXT_PROMPT = (
     "You are a helpful health assistant for a government hospital system "
-    "(Telangana Health Services). A patient has submitted a health question "
+    "(Paradip Port Authority). A patient has submitted a health question "
     "through a WhatsApp chatbot. Give a clear, safe, and actionable response.\n\n"
     "Formatting rules — follow exactly:\n"
     "- Start directly with the answer. Do not use openers like 'Here is...' or 'Sure!'.\n"
@@ -70,7 +70,7 @@ AI_TEXT_PROMPT = (
 # Used by Audio Guidance (voice reply — must be conversational, no lists/emojis).
 HEALTH_CONTEXT_PROMPT = (
     "You are a warm, helpful voice health assistant for a government hospital "
-    "system (Telangana Health Services). A citizen has asked the following "
+    "system (Paradip Port Authority). A citizen has asked the following "
     "question in a voice message. Answer it directly and helpfully.\n\n"
     "Guidelines:\n"
     "- Keep the answer short and conversational — it will be read aloud as "

@@ -1,14 +1,12 @@
-"""FastAPI entrypoint for the WhatsApp Flows endpoint server."""
+﻿"""FastAPI entrypoint for the WhatsApp Flows endpoint server."""
 
 from __future__ import annotations
-
 import hashlib
 import hmac
 import json
+import logging
 import os
-
 import httpx
-
 from dotenv import load_dotenv
 from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.responses import PlainTextResponse, Response
@@ -18,6 +16,8 @@ from src.encryption import FlowEndpointException, decrypt_request, encrypt_respo
 from src.flow import get_next_screen
 from src.webhook_utils import get_first_message, get_value
 
+logger = logging.getLogger(__name__)
+
 
 load_dotenv()
 
@@ -26,19 +26,20 @@ app = FastAPI(title="WhatsApp Flows Endpoint")
 PORT                 = int(os.getenv("PORT", "3000"))
 APP_SECRET           = os.getenv("APP_SECRET", "7738af0498e44f879eb5c93a5812729c")
 PASSPHRASE      = os.getenv("PASSPHRASE", "-encodedCommand")
-PRIVATE_KEY     = os.getenv("PRIVATE_KEY")
+PRIVATE_KEY     = (os.getenv("PRIVATE_KEY") or "").replace("\\n", "\n") or None
+PUBLIC_KEY      = os.getenv("PUBLIC_KEY")
 GRAPH_API_TOKEN = os.getenv("GRAPH_API_TOKEN")
 FLOW_ID              = os.getenv("FLOW_ID")
 FLOW_TOKEN           = os.getenv("flow_token", "flows-builder-token")
 
-# ── THS access control ───────────────────────────────────────────────────────
-# THS replies only to events delivered to its own WhatsApp number, and (during
-# rollout) only to a whitelist of test senders. Set THS_ALLOWED_NUMBERS="" to
+# ── PPA access control ───────────────────────────────────────────────────────
+# PPA replies only to events delivered to its own WhatsApp number, and (during
+# rollout) only to a whitelist of test senders. Set PPA_ALLOWED_NUMBERS="" to
 # allow every sender once the service goes live.
-THS_PHONE_NUMBER_ID = os.getenv("THS_PHONE_NUMBER_ID", "1150422371484965").strip()
-THS_ALLOWED_NUMBERS = {
+PPA_PHONE_NUMBER_ID = os.getenv("PPA_PHONE_NUMBER_ID", "1150422371484965").strip()
+PPA_ALLOWED_NUMBERS = {
     n.strip()
-    for n in os.getenv("THS_ALLOWED_NUMBERS").split(",")
+    for n in os.getenv("PPA_ALLOWED_NUMBERS", "").split(",")
     if n.strip()
 }
 
@@ -104,15 +105,26 @@ async def flow_endpoint(request: Request) -> Response:
         body = await request.json()
         decrypted_request = decrypt_request(body, PRIVATE_KEY, PASSPHRASE)
     except FlowEndpointException as exc:
+        logger.error("Decrypt failed [%s]: %s", exc.status_code, exc.message)
         return Response(status_code=exc.status_code)
     except Exception:
+        logger.exception("Unexpected error decrypting flow request")
         return Response(status_code=500)
 
     aes_key_buffer = decrypted_request["aesKeyBuffer"]
     initial_vector_buffer = decrypted_request["initialVectorBuffer"]
     decrypted_body = decrypted_request["decryptedBody"]
 
-    screen_response = await get_next_screen(decrypted_body)
+    try:
+        screen_response = await get_next_screen(decrypted_body)
+    except Exception:
+        logger.exception(
+            "get_next_screen failed — screen=%r action=%r data=%r",
+            decrypted_body.get("screen"),
+            decrypted_body.get("action"),
+            decrypted_body.get("data"),
+        )
+        return Response(status_code=500)
 
     encrypted = encrypt_response(screen_response, aes_key_buffer, initial_vector_buffer)
     return Response(content=encrypted, media_type="text/plain")
@@ -148,11 +160,11 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
         message         = get_first_message(payload)
         sender          = message.get("from", "")
 
-        # ── Respond only to events delivered to THS's own number ─────────
+        # ── Respond only to events delivered to PPA's own number ─────────
         if message:
-            if THS_PHONE_NUMBER_ID and phone_number_id != THS_PHONE_NUMBER_ID:
+            if PPA_PHONE_NUMBER_ID and phone_number_id != PPA_PHONE_NUMBER_ID:
                 return Response(status_code=200)
-            if THS_ALLOWED_NUMBERS and sender not in THS_ALLOWED_NUMBERS:
+            if PPA_ALLOWED_NUMBERS and sender not in PPA_ALLOWED_NUMBERS:
                 return Response(status_code=200)
 
         if message and phone_number_id:
@@ -171,7 +183,7 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                             "type": "interactive",
                             "interactive": {
                                 "type": "flow",
-                                "header": {"type": "text", "text": "👋 I'm THS Virtual Assistant"},
+                                "header": {"type": "text", "text": "👋 I'm PPA Virtual Assistant"},
                                 "body": {
                                     "text": (
                                         "I can assist you with booking appointments, finding doctors, accessing lab reports, and providing AI-powered health guidance."
@@ -225,7 +237,6 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                     if service == "appointment":
                         department = flow_data.get("department", "Unknown")
                         hospital   = flow_data.get("hospital",   "Unknown")
-                        district   = flow_data.get("district",   "Unknown")
                         date       = flow_data.get("date",       "Unknown")
                         time       = flow_data.get("time",       "Unknown")
                         name       = flow_data.get("name",       "")
@@ -235,8 +246,7 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                             f"👤 Patient: {name}\n"
                             f"📞 Phone: {phone}\n\n"
                             f"🏥 Department: {department}\n"
-                            f"🏨 Hospital: {hospital}\n"
-                            f"📍 District: {district}\n\n"
+                            f"🏨 Hospital: {hospital}\n\n"
                             f"📅 Date: {date}\n"
                             f"⏰ Time: {time}"
                         )
@@ -329,7 +339,7 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                 )
 
     except Exception:
-        pass
+        logger.exception("Unhandled error in webhook_receiver")
 
     return Response(status_code=200)
 

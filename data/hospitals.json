@@ -1,0 +1,10 @@
+{
+    "ppa_hospital": {
+        "name": "PPA Hospital",
+        "address": "Paradip Port Area, Paradip, Odisha – 754142",
+        "phone": "+91-6722-222041",
+        "specialties": "General Medicine, General Surgery, Orthopedics, Gynecology & Obstetrics, Pediatrics, ENT, Ophthalmology, Cardiology, Dermatology, Dental",
+        "district_id": "paradip",
+        "district": "Paradip"
+    }
+}

@@ -1,0 +1,231 @@
+{
+    "general_medicine": {
+        "name": "General Medicine",
+        "timings": "Mon–Sat: 8:00 AM – 2:00 PM",
+        "doctors": [
+            "Dr. A. K. Rao – MBBS, MD (General Medicine)",
+            "Dr. P. C. Das – MBBS, MD (Internal Medicine)"
+        ]
+    },
+    "general_surgery": {
+        "name": "General Surgery",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. K. Panda – MBBS, MS (General Surgery)",
+            "Dr. R. N. Sahoo – MBBS, MS (General Surgery)"
+        ]
+    },
+    "cardiology": {
+        "name": "Cardiology",
+        "timings": "Mon–Fri: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. B. K. Mishra – MBBS, MD, DM (Cardiology)"
+        ]
+    },
+    "orthopedics": {
+        "name": "Orthopedics",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. D. P. Nayak – MBBS, MS (Orthopaedics)",
+            "Dr. M. Behera – MBBS, DNB (Orthopaedics)"
+        ]
+    },
+    "gynecology": {
+        "name": "Gynecology & Obstetrics",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. Patra – MBBS, MS (Obstetrics & Gynaecology)",
+            "Dr. L. Mohapatra – MBBS, DGO"
+        ]
+    },
+    "pediatrics": {
+        "name": "Pediatrics",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. P. K. Sahu – MBBS, MD (Paediatrics)"
+        ]
+    },
+    "ent": {
+        "name": "ENT",
+        "timings": "Mon, Wed, Fri: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. R. Senapati – MBBS, MS (ENT)"
+        ]
+    },
+    "ophthalmology": {
+        "name": "Ophthalmology",
+        "timings": "Tue, Thu, Sat: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. A. Dash – MBBS, MS (Ophthalmology)"
+        ]
+    },
+    "dermatology": {
+        "name": "Dermatology",
+        "timings": "Mon, Wed, Fri: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. Mohanty – MBBS, MD (Dermatology)"
+        ]
+    },
+    "dental": {
+        "name": "Dental",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. P. Swarup – BDS, MDS (Oral & Maxillofacial Surgery)"
+        ]
+    },
+    "psychiatry": {
+        "name": "Psychiatry",
+        "timings": "Tue, Thu: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. K. Parida – MBBS, MD (Psychiatry)"
+        ]
+    },
+    "pulmonology": {
+        "name": "Pulmonology",
+        "timings": "Mon–Fri: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. T. Rout – MBBS, MD (Pulmonology & Respiratory Medicine)"
+        ]
+    },
+    "nephrology": {
+        "name": "Nephrology",
+        "timings": "Mon, Wed, Fri: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. B. Tripathy – MBBS, MD, DM (Nephrology)"
+        ]
+    },
+    "neurology": {
+        "name": "Neurology",
+        "timings": "Tue, Thu: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. G. Pradhan – MBBS, MD, DM (Neurology)"
+        ]
+    },
+    "endocrinology": {
+        "name": "Endocrinology",
+        "timings": "Mon, Wed: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. N. Mohanty – MBBS, MD, DM (Endocrinology)"
+        ]
+    },
+    "urology": {
+        "name": "Urology",
+        "timings": "Tue, Fri: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. Biswal – MBBS, MS, MCh (Urology)"
+        ]
+    },
+    "critical_care": {
+        "name": "Critical Care",
+        "timings": "24 hours, 7 days",
+        "doctors": [
+            "Dr. R. Kar – MBBS, MD (Critical Care Medicine)",
+            "Dr. A. Behera – MBBS, DA, IDCCM"
+        ]
+    },
+    "tuberculosis": {
+        "name": "Tuberculosis",
+        "timings": "Mon–Sat: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. M. Prusty – MBBS, MD (Chest & TB)"
+        ]
+    },
+    "infectious_diseases": {
+        "name": "Infectious Diseases",
+        "timings": "Mon–Fri: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. D. Jena – MBBS, MD (Infectious Diseases)"
+        ]
+    },
+    "preventive_medicine": {
+        "name": "Preventive Medicine",
+        "timings": "Mon–Sat: 8:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. B. Nanda – MBBS, MD (Community Medicine)"
+        ]
+    },
+    "gastroenterology": {
+        "name": "Gastroenterology",
+        "timings": "Mon, Wed, Fri: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. P. Swain – MBBS, MD, DM (Gastroenterology)"
+        ]
+    },
+    "oncology": {
+        "name": "Oncology",
+        "timings": "Mon–Fri: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. Mahapatra – MBBS, MD, DM (Medical Oncology)"
+        ]
+    },
+    "plastic_surgery": {
+        "name": "Plastic Surgery",
+        "timings": "Tue, Thu: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. R. Naik – MBBS, MS, MCh (Plastic & Reconstructive Surgery)"
+        ]
+    },
+    "neonatology": {
+        "name": "Neonatology",
+        "timings": "24 hours, 7 days",
+        "doctors": [
+            "Dr. A. Hota – MBBS, MD (Neonatology), FNNF"
+        ]
+    },
+    "pediatric_surgery": {
+        "name": "Pediatric Surgery",
+        "timings": "Mon, Wed, Fri: 9:00 AM – 12:00 PM",
+        "doctors": [
+            "Dr. P. Dalai – MBBS, MS, MCh (Paediatric Surgery)"
+        ]
+    },
+    "rheumatology": {
+        "name": "Rheumatology",
+        "timings": "Mon, Thu: 10:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. S. Samantaray – MBBS, MD, DM (Rheumatology)"
+        ]
+    },
+    "radiation_therapy": {
+        "name": "Radiation Therapy",
+        "timings": "Mon–Fri: 9:00 AM – 3:00 PM",
+        "doctors": [
+            "Dr. B. Sahoo – MBBS, MD (Radiation Oncology)"
+        ]
+    },
+    "chemotherapy": {
+        "name": "Chemotherapy",
+        "timings": "Mon–Fri: 9:00 AM – 3:00 PM",
+        "doctors": [
+            "Dr. S. Mahapatra – MBBS, MD, DM (Medical Oncology)"
+        ]
+    },
+    "palliative_care": {
+        "name": "Palliative Care",
+        "timings": "Mon–Fri: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. M. Das – MBBS, MD (Palliative Medicine)"
+        ]
+    },
+    "unani_medicine": {
+        "name": "Unani Medicine",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. A. Khan – BUMS, MD (Unani)"
+        ]
+    },
+    "ayurvedic_medicine": {
+        "name": "Ayurvedic Medicine",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. R. Sharma – BAMS, MD (Ayurveda)"
+        ]
+    },
+    "homeopathy": {
+        "name": "Homeopathy",
+        "timings": "Mon–Sat: 9:00 AM – 1:00 PM",
+        "doctors": [
+            "Dr. P. Verma – BHMS, MD (Homoeopathy)"
+        ]
+    }
+}

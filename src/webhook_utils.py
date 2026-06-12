@@ -1,6 +1,6 @@
 """Shared helpers for parsing Meta WhatsApp webhook payloads.
 
-Both the router (``main.py``) and the THS service (``src/server.py``) receive
+Both the router (``main.py``) and the PPA service (``src/server.py``) receive
 the same Meta webhook envelope, so the ``entry → changes → value`` navigation
 lives here in exactly one place instead of being copy-pasted in each entry point.
 """
