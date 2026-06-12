@@ -32,11 +32,12 @@ def main() -> None:
         )
 
     passphrase = sys.argv[1]
+    private_key, public_key = generate_key_pair(passphrase)
 
-    try:
-        private_key, public_key = generate_key_pair(passphrase)
-    except Exception as err:
-        pass
+    print("\n===== PRIVATE KEY (set as PRIVATE_KEY in .env) =====")
+    print(private_key)
+    print("===== PUBLIC KEY (upload to Meta Business Manager → WhatsApp → Flows) =====")
+    print(public_key)
 
 
 if __name__ == "__main__":
