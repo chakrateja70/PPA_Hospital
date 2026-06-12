@@ -175,8 +175,7 @@ def _send(phone_number_id: str, payload: dict) -> bool:
             resp = client.post(url, headers=headers, json=payload)
             resp.raise_for_status()
         return True
-    except Exception as exc:
-        print(f"[audio] send failed: {exc}")
+    except Exception:
         return False
 
 
@@ -216,8 +215,7 @@ def transcribe_audio(media_id: str) -> Optional[Tuple[str, str]]:
         if transcription.text and transcription.text.strip():
             return transcription.text, transcription.language_code
         return None
-    except Exception as exc:
-        print(f"[audio] transcription failed: {exc}")
+    except Exception:
         return None
 
 
@@ -245,8 +243,7 @@ def generate_answer(question: str, context: str = HEALTH_CONTEXT_PROMPT) -> Opti
             max_tokens=400,
         )
         return completion.choices[0].message.content.strip()
-    except Exception as exc:
-        print(f"[audio] LLM call failed: {exc}")
+    except Exception:
         return None
 
 
@@ -259,8 +256,7 @@ def text_to_speech(text: str) -> Optional[bytes]:
             model_id=ELEVENLABS_MODEL_ID,
         )
         return b"".join(audio_generator)
-    except Exception as exc:
-        print(f"[audio] text-to-speech failed: {exc}")
+    except Exception:
         return None
 
 
@@ -275,8 +271,7 @@ def upload_audio(audio_bytes: bytes, phone_number_id: str) -> Optional[str]:
             resp = client.post(url, files=files, data=data, headers=headers)
             resp.raise_for_status()
         return resp.json().get("id")
-    except Exception as exc:
-        print(f"[audio] audio upload failed: {exc}")
+    except Exception:
         return None
 
 
@@ -333,14 +328,12 @@ def handle_audio_query(media_id: str, sender: str, phone_number_id: str) -> None
         return
 
     transcribed_text, language_code = result
-    print(f"[audio] transcribed ({language_code}): {transcribed_text}")
 
     # 2. Translate the question to English for the LLM
     if _is_english(language_code):
         english_query = transcribed_text
     else:
         english_query = translate(transcribed_text, "en")
-        print(f"[audio] translated to English: {english_query}")
 
     # 3. Direct LLM answer (no RAG)
     answer = generate_answer(english_query)
@@ -358,7 +351,6 @@ def handle_audio_query(media_id: str, sender: str, phone_number_id: str) -> None
     else:
         target_lang = _LANG_MAP.get(language_code, (language_code or "")[:2] or "en")
         localized_answer = translate(answer, target_lang)
-        print(f"[audio] translated answer to {language_code} ({target_lang})")
 
     # 5. Text-to-speech (fall back to text on failure)
     speech_text = _prepare_for_tts(localized_answer)
@@ -371,6 +363,3 @@ def handle_audio_query(media_id: str, sender: str, phone_number_id: str) -> None
     audio_media_id = upload_audio(audio_bytes, phone_number_id)
     if not audio_media_id or not send_audio_message(sender, audio_media_id, phone_number_id):
         send_text_message(sender, localized_answer, phone_number_id)
-        return
-
-    print(f"[audio] voice reply sent to {sender}")

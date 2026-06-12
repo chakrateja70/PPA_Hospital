@@ -739,88 +739,172 @@
         {
             "id": "DOCTOR_OPD",
             "title": "Doctor & OPD Information",
-            "data": {
-                "department": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "__example__": [
-                        {
-                            "id": "cardiology",
-                            "title": "Cardiology"
-                        },
-                        {
-                            "id": "urology",
-                            "title": "Urology"
-                        },
-                        {
-                            "id": "neurology",
-                            "title": "Neurology"
-                        },
-                        {
-                            "id": "orthopedics",
-                            "title": "Orthopedics"
-                        },
-                        {
-                            "id": "dermatology",
-                            "title": "Dermatology"
-                        },
-                        {
-                            "id": "ent",
-                            "title": "ENT"
-                        },
-                        {
-                            "id": "general_medicine",
-                            "title": "General Medicine"
-                        },
-                        {
-                            "id": "general_surgery",
-                            "title": "General Surgery"
-                        },
-                        {
-                            "id": "gynecology",
-                            "title": "Gynecology & Obstetrics"
-                        },
-                        {
-                            "id": "pediatrics",
-                            "title": "Pediatrics"
-                        }
-                    ]
-                }
-            },
             "layout": {
                 "type": "SingleColumnLayout",
                 "children": [
                     {
-                        "type": "Form",
-                        "name": "doctor_opd_form",
-                        "children": [
+                        "type": "NavigationList",
+                        "name": "department_nav",
+                        "list-items": [
                             {
-                                "type": "Dropdown",
-                                "label": "Select Department",
-                                "name": "department",
-                                "data-source": "${data.department}",
-                                "required": true
+                                "id": "cardiology",
+                                "main-content": { "title": "Cardiology", "metadata": "Heart care, BP, ECG & chest pain treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "cardiology" } }
                             },
                             {
-                                "type": "Footer",
-                                "label": "Find Doctors",
-                                "on-click-action": {
-                                    "name": "data_exchange",
-                                    "payload": {
-                                        "trigger": "find_doctors",
-                                        "department": "${form.department}"
-                                    }
-                                }
+                                "id": "urology",
+                                "main-content": { "title": "Urology", "metadata": "Kidney, urinary tract & bladder care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "urology" } }
+                            },
+                            {
+                                "id": "neurology",
+                                "main-content": { "title": "Neurology", "metadata": "Brain, nerves, migraine & stroke care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "neurology" } }
+                            },
+                            {
+                                "id": "orthopedics",
+                                "main-content": { "title": "Orthopedics", "metadata": "Bones, joints, fractures & arthritis care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "orthopedics" } }
+                            },
+                            {
+                                "id": "dermatology",
+                                "main-content": { "title": "Dermatology", "metadata": "Skin, hair, nail & allergy treatments" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "dermatology" } }
+                            },
+                            {
+                                "id": "ent",
+                                "main-content": { "title": "ENT", "metadata": "Ear, nose, throat & sinus care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "ent" } }
+                            },
+                            {
+                                "id": "ophthalmology",
+                                "main-content": { "title": "Ophthalmology", "metadata": "Eye care, vision testing & cataract treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "ophthalmology" } }
+                            },
+                            {
+                                "id": "gastroenterology",
+                                "main-content": { "title": "Gastroenterology", "metadata": "Digestive system, stomach & liver care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "gastroenterology" } }
+                            },
+                            {
+                                "id": "pulmonology",
+                                "main-content": { "title": "Pulmonology", "metadata": "Lung, breathing & respiratory care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "pulmonology" } }
+                            },
+                            {
+                                "id": "nephrology",
+                                "main-content": { "title": "Nephrology", "metadata": "Kidney disease & dialysis care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "nephrology" } }
+                            },
+                            {
+                                "id": "oncology",
+                                "main-content": { "title": "Oncology", "metadata": "Cancer diagnosis, treatment & care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "oncology" } }
+                            },
+                            {
+                                "id": "psychiatry",
+                                "main-content": { "title": "Psychiatry", "metadata": "Mental health, stress & depression care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "psychiatry" } }
+                            },
+                            {
+                                "id": "general_medicine",
+                                "main-content": { "title": "General Medicine", "metadata": "Fever, infections & general health checkups" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "general_medicine" } }
+                            },
+                            {
+                                "id": "general_surgery",
+                                "main-content": { "title": "General Surgery", "metadata": "Surgical consultations & procedures" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "general_surgery" } }
+                            },
+                            {
+                                "id": "gynecology",
+                                "main-content": { "title": "Gynecology & Obstetrics", "metadata": "Women's health, pregnancy & reproductive care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "gynecology" } }
+                            },
+                            {
+                                "id": "pediatrics",
+                                "main-content": { "title": "Pediatrics", "metadata": "Child healthcare, growth & vaccinations" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "pediatrics" } }
+                            },
+                            {
+                                "id": "endocrinology",
+                                "main-content": { "title": "Endocrinology", "metadata": "Diabetes, thyroid & hormone care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "endocrinology" } }
+                            },
+                            {
+                                "id": "rheumatology",
+                                "main-content": { "title": "Rheumatology", "metadata": "Arthritis, joint pain & autoimmune disorders" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "rheumatology" } }
+                            },
+                            {
+                                "id": "plastic_surgery",
+                                "main-content": { "title": "Plastic Surgery", "metadata": "Cosmetic, reconstructive & skin procedures" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "plastic_surgery" } }
+                            },
+                            {
+                                "id": "dental",
+                                "main-content": { "title": "Dental", "metadata": "Teeth cleaning, cavities & oral care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "dental" } }
+                            },
+                            {
+                                "id": "neonatology",
+                                "main-content": { "title": "Neonatology", "metadata": "Newborn care & intensive neonatal unit" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "neonatology" } }
+                            },
+                            {
+                                "id": "pediatric_surgery",
+                                "main-content": { "title": "Pediatric Surgery", "metadata": "Surgical procedures for children" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "pediatric_surgery" } }
+                            },
+                            {
+                                "id": "critical_care",
+                                "main-content": { "title": "Critical Care", "metadata": "ICU & emergency intensive care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "critical_care" } }
+                            },
+                            {
+                                "id": "radiation_therapy",
+                                "main-content": { "title": "Radiation Therapy", "metadata": "Cancer radiation & radiotherapy treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "radiation_therapy" } }
+                            },
+                            {
+                                "id": "chemotherapy",
+                                "main-content": { "title": "Chemotherapy", "metadata": "Cancer drug therapy & infusion treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "chemotherapy" } }
+                            },
+                            {
+                                "id": "palliative_care",
+                                "main-content": { "title": "Palliative Care", "metadata": "Comfort & end-of-life symptom care" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "palliative_care" } }
+                            },
+                            {
+                                "id": "infectious_diseases",
+                                "main-content": { "title": "Infectious Diseases", "metadata": "Infections, fever & tropical disease treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "infectious_diseases" } }
+                            },
+                            {
+                                "id": "tuberculosis",
+                                "main-content": { "title": "Tuberculosis", "metadata": "TB diagnosis, DOTS therapy & chest infections" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "tuberculosis" } }
+                            },
+                            {
+                                "id": "preventive_medicine",
+                                "main-content": { "title": "Preventive Medicine", "metadata": "Immunization, screening & public health" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "preventive_medicine" } }
+                            },
+                            {
+                                "id": "unani_medicine",
+                                "main-content": { "title": "Unani Medicine", "metadata": "Traditional Unani holistic treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "unani_medicine" } }
+                            },
+                            {
+                                "id": "ayurvedic_medicine",
+                                "main-content": { "title": "Ayurvedic Medicine", "metadata": "Ayurvedic treatments & herbal therapies" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "ayurvedic_medicine" } }
+                            },
+                            {
+                                "id": "homeopathy",
+                                "main-content": { "title": "Homeopathy", "metadata": "Homeopathic consultation & treatment" },
+                                "on-click-action": { "name": "data_exchange", "payload": { "trigger": "find_doctors", "department": "homeopathy" } }
                             }
                         ]
                     }

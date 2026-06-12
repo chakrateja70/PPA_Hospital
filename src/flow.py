@@ -79,9 +79,7 @@ SCREEN_RESPONSES = {
 
     "DOCTOR_OPD": {
         "screen": "DOCTOR_OPD",
-        "data": {
-            "department": _DEPARTMENTS,
-        },
+        "data": {},
     },
 
     "DOCTOR_OPD_RESULT": {
@@ -278,13 +276,7 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                 }
 
             if service == "DOCTOR_OPD":
-                return {
-                    **SCREEN_RESPONSES["DOCTOR_OPD"],
-                    "data": {
-                        **SCREEN_RESPONSES["DOCTOR_OPD"]["data"],
-                        "is_hospital_enabled": False,
-                    },
-                }
+                return SCREEN_RESPONSES["DOCTOR_OPD"]
 
             if service == "LAB_REPORTS":
                 return SCREEN_RESPONSES["LAB_REPORTS"]
