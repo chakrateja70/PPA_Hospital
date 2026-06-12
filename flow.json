@@ -7,7 +7,7 @@
             "DOCTOR_OPD",
             "LAB_REPORTS",
             "AI_ASSISTANCE",
-            "HOSPITAL_INFO",
+            "HOSPITAL_DETAIL",
             "EMERGENCY_VIDEOS",
             "AUDIO_GUIDANCE"
         ],
@@ -29,13 +29,7 @@
             "LAB_REPORT_VIEW"
         ],
         "LAB_REPORT_VIEW": [],
-        "AI_ASSISTANCE": [
-            "AI_RESPONSE"
-        ],
-        "AI_RESPONSE": [],
-        "HOSPITAL_INFO": [
-            "HOSPITAL_DETAIL"
-        ],
+        "AI_ASSISTANCE": [],
         "HOSPITAL_DETAIL": [],
         "EMERGENCY_VIDEOS": [],
         "AUDIO_GUIDANCE": []
@@ -106,8 +100,8 @@
                             {
                                 "id": "hospital_info",
                                 "main-content": {
-                                    "title": "General Hospital Information",
-                                    "metadata": "Find address, phone & specialties of govt. hospitals"
+                                    "title": "PPA Hospital Information",
+                                    "metadata": "Find address, phone & specialties of PPA Hospital"
                                 },
                                 "on-click-action": {
                                     "name": "data_exchange",
@@ -330,438 +324,9 @@
                         }
                     ]
                 },
-                "district": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "__example__": [
-                        {
-                            "id": "adilabad",
-                            "title": "Adilabad"
-                        },
-                        {
-                            "id": "bhadradri_kothagudem",
-                            "title": "Bhadradri Kothagudem"
-                        },
-                        {
-                            "id": "hanumakonda",
-                            "title": "Hanumakonda"
-                        },
-                        {
-                            "id": "hyderabad",
-                            "title": "Hyderabad"
-                        },
-                        {
-                            "id": "jagitial",
-                            "title": "Jagitial"
-                        },
-                        {
-                            "id": "jayashankar_bhupalpally",
-                            "title": "Jayashankar Bhupalpally"
-                        },
-                        {
-                            "id": "kamareddy",
-                            "title": "Kamareddy"
-                        },
-                        {
-                            "id": "karimnagar",
-                            "title": "Karimnagar"
-                        },
-                        {
-                            "id": "khammam",
-                            "title": "Khammam"
-                        },
-                        {
-                            "id": "kumrambheem_asifabad",
-                            "title": "Kumuram Bheem Asifabad"
-                        },
-                        {
-                            "id": "mahabubabad",
-                            "title": "Mahabubabad"
-                        },
-                        {
-                            "id": "medak",
-                            "title": "Medak"
-                        },
-                        {
-                            "id": "mulugu",
-                            "title": "Mulugu"
-                        },
-                        {
-                            "id": "nagarkurnool",
-                            "title": "Nagarkurnool"
-                        },
-                        {
-                            "id": "nalgonda",
-                            "title": "Nalgonda"
-                        },
-                        {
-                            "id": "narayanpet",
-                            "title": "Narayanpet"
-                        },
-                        {
-                            "id": "nirmal",
-                            "title": "Nirmal"
-                        },
-                        {
-                            "id": "nizamabad",
-                            "title": "Nizamabad"
-                        },
-                        {
-                            "id": "peddapalli",
-                            "title": "Peddapalli"
-                        },
-                        {
-                            "id": "rajanna_sircilla",
-                            "title": "Rajanna Sircilla"
-                        },
-                        {
-                            "id": "rangareddy",
-                            "title": "Ranga Reddy"
-                        },
-                        {
-                            "id": "sangareddy",
-                            "title": "Sangareddy"
-                        },
-                        {
-                            "id": "siddipet",
-                            "title": "Siddipet"
-                        },
-                        {
-                            "id": "suryapet",
-                            "title": "Suryapet"
-                        },
-                        {
-                            "id": "vikarabad",
-                            "title": "Vikarabad"
-                        },
-                        {
-                            "id": "yadadri_bhuvanagiri",
-                            "title": "Yadadri Bhuvanagiri"
-                        }
-                    ]
-                },
-                "is_district_enabled": {
-                    "type": "boolean",
-                    "__example__": true,
-                    "description": "Always true — district is always required"
-                },
                 "hospital": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "__example__": [
-                        {
-                            "id": "ogh",
-                            "title": "Osmania General Hospital"
-                        },
-                        {
-                            "id": "gh",
-                            "title": "Gandhi Hospital"
-                        },
-                        {
-                            "id": "nims",
-                            "title": "NIMS"
-                        },
-                        {
-                            "id": "nh",
-                            "title": "Niloufer Hospital"
-                        },
-                        {
-                            "id": "mnj",
-                            "title": "MNJ Institute of Oncology"
-                        },
-                        {
-                            "id": "fh",
-                            "title": "Fever Hospital"
-                        },
-                        {
-                            "id": "gmh",
-                            "title": "Government Maternity Hospital"
-                        },
-                        {
-                            "id": "sbbb",
-                            "title": "SBBB Maternity Hospital"
-                        },
-                        {
-                            "id": "tbch",
-                            "title": "TB & Chest Hospital"
-                        },
-                        {
-                            "id": "ipm",
-                            "title": "Institute of Preventive Medicine"
-                        },
-                        {
-                            "id": "gdch",
-                            "title": "Government Dental College and Hospital"
-                        },
-                        {
-                            "id": "mhe",
-                            "title": "Mental Hospital Erragadda"
-                        },
-                        {
-                            "id": "ngh",
-                            "title": "Nizamia General Hospital"
-                        },
-                        {
-                            "id": "gah_erragadda",
-                            "title": "Government Ayurvedic Hospital Erragadda"
-                        },
-                        {
-                            "id": "gah_charminar",
-                            "title": "Government Ayurvedic Hospital Charminar"
-                        },
-                        {
-                            "id": "golconda_h",
-                            "title": "Golconda Hospital"
-                        },
-                        {
-                            "id": "nampally_h",
-                            "title": "Nampally Hospital"
-                        },
-                        {
-                            "id": "sdeh",
-                            "title": "SD Eye Hospital"
-                        },
-                        {
-                            "id": "ent_kk",
-                            "title": "ENT Hospital King Kothi"
-                        },
-                        {
-                            "id": "stbc",
-                            "title": "State TB Centre Erragadda"
-                        },
-                        {
-                            "id": "hh",
-                            "title": "Homeopathy Hospital"
-                        },
-                        {
-                            "id": "esi_sn",
-                            "title": "ESI Hospital Sanath Nagar"
-                        },
-                        {
-                            "id": "esi_e",
-                            "title": "ESI Hospital Erragadda"
-                        },
-                        {
-                            "id": "rh_sec",
-                            "title": "Railway Hospital Secunderabad"
-                        },
-                        {
-                            "id": "ah_kondapur",
-                            "title": "AH Kondapur"
-                        },
-                        {
-                            "id": "ggch",
-                            "title": "Government General & Chest Hospital"
-                        },
-                        {
-                            "id": "mgm",
-                            "title": "MGM Hospital"
-                        },
-                        {
-                            "id": "gmh_wgl",
-                            "title": "Government Maternity Hospital Warangal"
-                        },
-                        {
-                            "id": "ah_mahabubabad",
-                            "title": "AH Mahabubabad"
-                        },
-                        {
-                            "id": "dh_warangal",
-                            "title": "DH Warangal"
-                        },
-                        {
-                            "id": "ggh_karimnagar",
-                            "title": "Government General Hospital Karimnagar"
-                        },
-                        {
-                            "id": "ah_karimnagar",
-                            "title": "AH Karimnagar"
-                        },
-                        {
-                            "id": "ah_siddipet",
-                            "title": "AH Siddipet"
-                        },
-                        {
-                            "id": "ah_jagityal",
-                            "title": "AH Jagityal"
-                        },
-                        {
-                            "id": "ggh_nizamabad",
-                            "title": "Government General Hospital Nizamabad"
-                        },
-                        {
-                            "id": "gmh_nizamabad",
-                            "title": "Government Maternity Hospital Nizamabad"
-                        },
-                        {
-                            "id": "ggh_khammam",
-                            "title": "Government General Hospital Khammam"
-                        },
-                        {
-                            "id": "ah_kothagudem",
-                            "title": "AH Kothagudem"
-                        },
-                        {
-                            "id": "gmh_khammam",
-                            "title": "Government Maternity Hospital Khammam"
-                        },
-                        {
-                            "id": "ggh_nalgonda",
-                            "title": "Government General Hospital Nalgonda"
-                        },
-                        {
-                            "id": "ah_miryalaguda",
-                            "title": "AH Miryalaguda"
-                        },
-                        {
-                            "id": "dh_mahbubnagar",
-                            "title": "DH Mahbubnagar"
-                        },
-                        {
-                            "id": "ah_gadwal",
-                            "title": "AH Gadwal"
-                        },
-                        {
-                            "id": "chc_shadnagar",
-                            "title": "CHC Shadnagar"
-                        },
-                        {
-                            "id": "dh_adilabad",
-                            "title": "DH Adilabad"
-                        },
-                        {
-                            "id": "ah_mancherial",
-                            "title": "AH Mancherial"
-                        },
-                        {
-                            "id": "ah_nirmal",
-                            "title": "AH Nirmal"
-                        },
-                        {
-                            "id": "rims_adilabad",
-                            "title": "RIMS Hospital Adilabad"
-                        },
-                        {
-                            "id": "ggh_medak",
-                            "title": "Government General Hospital Medak"
-                        },
-                        {
-                            "id": "ah_sangareddy",
-                            "title": "AH Sangareddy"
-                        },
-                        {
-                            "id": "ah_siddipet_medak",
-                            "title": "AH Siddipet Medak"
-                        },
-                        {
-                            "id": "ah_lb_nagar",
-                            "title": "AH LB Nagar"
-                        },
-                        {
-                            "id": "ah_vikarabad",
-                            "title": "AH Vikarabad"
-                        },
-                        {
-                            "id": "chc_tandur",
-                            "title": "CHC Tandur"
-                        },
-                        {
-                            "id": "ggh_suryapet",
-                            "title": "Government General Hospital Suryapet"
-                        },
-                        {
-                            "id": "dh_bhongir",
-                            "title": "DH Bhongir"
-                        },
-                        {
-                            "id": "dh_siddipet",
-                            "title": "DH Siddipet"
-                        },
-                        {
-                            "id": "dh_sircilla",
-                            "title": "DH Sircilla"
-                        },
-                        {
-                            "id": "dh_peddapalli",
-                            "title": "DH Peddapalli"
-                        },
-                        {
-                            "id": "dh_bhupalpally",
-                            "title": "DH Bhupalpally"
-                        },
-                        {
-                            "id": "ah_mulugu",
-                            "title": "AH Mulugu"
-                        },
-                        {
-                            "id": "dh_kothagudem",
-                            "title": "DH Kothagudem"
-                        },
-                        {
-                            "id": "dh_mahabubabad",
-                            "title": "DH Mahabubabad"
-                        },
-                        {
-                            "id": "dh_narayanpet",
-                            "title": "DH Narayanpet"
-                        },
-                        {
-                            "id": "dh_wanaparthy",
-                            "title": "DH Wanaparthy"
-                        },
-                        {
-                            "id": "dh_nagarkurnool",
-                            "title": "DH Nagarkurnool"
-                        },
-                        {
-                            "id": "dh_vikarabad",
-                            "title": "DH Vikarabad"
-                        },
-                        {
-                            "id": "dh_sangareddy",
-                            "title": "DH Sangareddy"
-                        },
-                        {
-                            "id": "dh_kamareddy",
-                            "title": "DH Kamareddy"
-                        },
-                        {
-                            "id": "dh_nirmal",
-                            "title": "DH Nirmal"
-                        },
-                        {
-                            "id": "dh_mancherial",
-                            "title": "DH Mancherial"
-                        },
-                        {
-                            "id": "dh_asifabad",
-                            "title": "DH Asifabad"
-                        }
-                    ]
-                },
-                "is_hospital_enabled": {
-                    "type": "boolean",
-                    "__example__": true
+                    "type": "string",
+                    "__example__": "ppa_hospital"
                 },
                 "date": {
                     "type": "array",
@@ -778,16 +343,32 @@
                     },
                     "__example__": [
                         {
-                            "id": "2026-06-06",
-                            "title": "Sat Jun 06 2026"
+                            "id": "2026-06-11",
+                            "title": "Thu Jun 11 2026"
                         },
                         {
-                            "id": "2026-06-07",
-                            "title": "Sun Jun 07 2026"
+                            "id": "2026-06-12",
+                            "title": "Fri Jun 12 2026"
                         },
                         {
-                            "id": "2026-06-08",
-                            "title": "Mon Jun 08 2026"
+                            "id": "2026-06-13",
+                            "title": "Sat Jun 13 2026"
+                        },
+                        {
+                            "id": "2026-06-14",
+                            "title": "Sun Jun 14 2026"
+                        },
+                        {
+                            "id": "2026-06-15",
+                            "title": "Mon Jun 15 2026"
+                        },
+                        {
+                            "id": "2026-06-16",
+                            "title": "Tue Jun 16 2026"
+                        },
+                        {
+                            "id": "2026-06-17",
+                            "title": "Wed Jun 17 2026"
                         }
                     ]
                 },
@@ -906,37 +487,8 @@
                                 }
                             },
                             {
-                                "type": "Dropdown",
-                                "label": "District",
-                                "name": "district",
-                                "data-source": "${data.district}",
-                                "required": "${data.is_district_enabled}",
-                                "enabled": "${data.is_district_enabled}",
-                                "on-select-action": {
-                                    "name": "data_exchange",
-                                    "payload": {
-                                        "trigger": "district_selected",
-                                        "department": "${form.department}",
-                                        "district": "${form.district}"
-                                    }
-                                }
-                            },
-                            {
-                                "type": "Dropdown",
-                                "label": "Hospital",
-                                "name": "hospital",
-                                "data-source": "${data.hospital}",
-                                "required": "${data.is_hospital_enabled}",
-                                "enabled": "${data.is_hospital_enabled}",
-                                "on-select-action": {
-                                    "name": "data_exchange",
-                                    "payload": {
-                                        "trigger": "hospital_selected",
-                                        "department": "${form.department}",
-                                        "location": "${form.district}",
-                                        "hospital": "${form.hospital}"
-                                    }
-                                }
+                                "type": "TextSubheading",
+                                "text": "🏥 PPA Hospital (pre-booking)"
                             },
                             {
                                 "type": "Dropdown",
@@ -950,8 +502,7 @@
                                     "payload": {
                                         "trigger": "date_selected",
                                         "department": "${form.department}",
-                                        "district": "${form.district}",
-                                        "hospital": "${form.hospital}",
+                                        "hospital": "${data.hospital}",
                                         "date": "${form.date}"
                                     }
                                 }
@@ -975,8 +526,7 @@
                                     },
                                     "payload": {
                                         "department": "${form.department}",
-                                        "district": "${form.district}",
-                                        "hospital": "${form.hospital}",
+                                        "hospital": "${data.hospital}",
                                         "date": "${form.date}",
                                         "time": "${form.time}"
                                     }
@@ -993,19 +543,15 @@
             "data": {
                 "department": {
                     "type": "string",
-                    "__example__": "beauty"
-                },
-                "district": {
-                    "type": "string",
-                    "__example__": "1"
+                    "__example__": "cardiology"
                 },
                 "hospital": {
                     "type": "string",
-                    "__example__": "dh_mch_king_koti"
+                    "__example__": "ppa_hospital"
                 },
                 "date": {
                     "type": "string",
-                    "__example__": "2024-01-01"
+                    "__example__": "2026-06-11"
                 },
                 "time": {
                     "type": "string",
@@ -1053,7 +599,6 @@
                                     "name": "data_exchange",
                                     "payload": {
                                         "department": "${data.department}",
-                                        "district": "${data.district}",
                                         "hospital": "${data.hospital}",
                                         "date": "${data.date}",
                                         "time": "${data.time}",
@@ -1076,27 +621,23 @@
             "data": {
                 "appointment": {
                     "type": "string",
-                    "__example__": "Beauty & Personal Care Department at Kings Cross, London\nMon Jan 01 2024 at 11:30."
+                    "__example__": "Cardiology\nHospital: PPA Hospital\nThu Jun 11 2026 at 10:30 AM"
                 },
                 "details": {
                     "type": "string",
-                    "__example__": "Name: John Doe\nEmail: john@example.com\nPhone: 123456789\n\nA free skin care consultation, please"
+                    "__example__": "Name: John Doe\nEmail: john@example.com\nPhone: 9876543210"
                 },
                 "department": {
                     "type": "string",
-                    "__example__": "beauty"
-                },
-                "district": {
-                    "type": "string",
-                    "__example__": "1"
+                    "__example__": "cardiology"
                 },
                 "hospital": {
                     "type": "string",
-                    "__example__": "dh_mch_king_koti"
+                    "__example__": "ppa_hospital"
                 },
                 "date": {
                     "type": "string",
-                    "__example__": "2024-01-01"
+                    "__example__": "2026-06-11"
                 },
                 "time": {
                     "type": "string",
@@ -1116,7 +657,7 @@
                 },
                 "more_details": {
                     "type": "string",
-                    "__example__": "A free skin care consultation, please"
+                    "__example__": "Chest pain and shortness of breath for 3 days"
                 }
             },
             "layout": {
@@ -1163,7 +704,6 @@
                                     "name": "data_exchange",
                                     "payload": {
                                         "department": "${data.department}",
-                                        "district": "${data.district}",
                                         "hospital": "${data.hospital}",
                                         "date": "${data.date}",
                                         "time": "${data.time}",
@@ -1248,53 +788,13 @@
                         },
                         {
                             "id": "gynecology",
-                            "title": "Gynecology"
+                            "title": "Gynecology & Obstetrics"
                         },
                         {
                             "id": "pediatrics",
                             "title": "Pediatrics"
                         }
                     ]
-                },
-                "hospital": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "__example__": [
-                        {
-                            "id": "dh_mch_king_koti",
-                            "title": "DH & MCH King Koti"
-                        },
-                        {
-                            "id": "dh_tandur",
-                            "title": "DH Tandur"
-                        },
-                        {
-                            "id": "ah_nampally",
-                            "title": "AH Nampally"
-                        },
-                        {
-                            "id": "ah_malakpet",
-                            "title": "AH Malakpet"
-                        },
-                        {
-                            "id": "ah_golconda",
-                            "title": "AH Golconda"
-                        }
-                    ]
-                },
-                "is_hospital_enabled": {
-                    "type": "boolean",
-                    "__example__": false
                 }
             },
             "layout": {
@@ -1309,22 +809,7 @@
                                 "label": "Select Department",
                                 "name": "department",
                                 "data-source": "${data.department}",
-                                "required": true,
-                                "on-select-action": {
-                                    "name": "data_exchange",
-                                    "payload": {
-                                        "trigger": "opd_department_selected",
-                                        "department": "${form.department}"
-                                    }
-                                }
-                            },
-                            {
-                                "type": "Dropdown",
-                                "label": "Select Hospital",
-                                "name": "hospital",
-                                "data-source": "${data.hospital}",
-                                "required": "${data.is_hospital_enabled}",
-                                "enabled": "${data.is_hospital_enabled}"
+                                "required": true
                             },
                             {
                                 "type": "Footer",
@@ -1333,8 +818,7 @@
                                     "name": "data_exchange",
                                     "payload": {
                                         "trigger": "find_doctors",
-                                        "department": "${form.department}",
-                                        "hospital": "${form.hospital}"
+                                        "department": "${form.department}"
                                     }
                                 }
                             }
@@ -1350,7 +834,7 @@
             "data": {
                 "result_text": {
                     "type": "string",
-                    "__example__": "🏥 Cardiology OPD\nHospital: Osmania General Hospital\n\nFull OPD details will be sent to your WhatsApp."
+                    "__example__": "🏥 Cardiology OPD\nHospital: PPA Hospital\n\nFull OPD details (timings & doctors) will be\nsent to your WhatsApp."
                 },
                 "department": {
                     "type": "string",
@@ -1358,7 +842,7 @@
                 },
                 "hospital": {
                     "type": "string",
-                    "__example__": "ogh"
+                    "__example__": "ppa_hospital"
                 }
             },
             "layout": {
@@ -1440,7 +924,7 @@
             "data": {
                 "report_summary": {
                     "type": "string",
-                    "__example__": "Patient: John Doe\nReport Date: 05 Jun 2026\n\nComplete Blood Count (CBC)\n- Haemoglobin: 13.5 g/dL (Normal)\n- WBC: 7200 /µL (Normal)\n- Platelets: 2.5 Lac /µL (Normal)"
+                    "__example__": "Patient: John Doe\nReport Date: 11 Jun 2026\n\nComplete Blood Count (CBC)\n- Haemoglobin: 13.5 g/dL (Normal)\n- WBC: 7200 /µL (Normal)\n- Platelets: 2.5 Lac /µL (Normal)"
                 },
                 "patient_name": {
                     "type": "string",
@@ -1464,7 +948,7 @@
                             },
                             {
                                 "type": "TextSubheading",
-                                "text": "For detailed reports, please visit your nearest hospital or contact the lab."
+                                "text": "For detailed reports, please visit the hospital or contact the lab."
                             },
                             {
                                 "type": "Footer",
@@ -1508,110 +992,6 @@
                                     "payload": {
                                         "trigger": "ai_query",
                                         "query": "${form.query}"
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            "id": "AI_RESPONSE",
-            "title": "AI Health Guidance",
-            "terminal": true,
-            "data": {
-                "ai_response": {
-                    "type": "string",
-                    "__example__": "Based on your symptoms (fever and headache for 2 days), here is some general guidance:\n\n1. Stay hydrated - drink plenty of water\n2. Rest adequately\n3. You may take paracetamol for fever relief\n4. If fever exceeds 103°F or persists beyond 3 days, please consult a doctor immediately\n\n⚠️ This is general health information only. For medical advice, please consult a qualified doctor."
-                }
-            },
-            "layout": {
-                "type": "SingleColumnLayout",
-                "children": [
-                    {
-                        "type": "Form",
-                        "name": "ai_response_form",
-                        "children": [
-                            {
-                                "type": "TextHeading",
-                                "text": "AI Health Guidance"
-                            },
-                            {
-                                "type": "TextBody",
-                                "text": "${data.ai_response}"
-                            },
-                            {
-                                "type": "TextSubheading",
-                                "text": "Disclaimer: This is general health information only and not a substitute for professional medical advice."
-                            },
-                            {
-                                "type": "Footer",
-                                "label": "Done",
-                                "on-click-action": {
-                                    "name": "complete",
-                                    "payload": {}
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            "id": "HOSPITAL_INFO",
-            "title": "General Hospital Information",
-            "data": {
-                "hospitals": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "__example__": [
-                        {
-                            "id": "ogh,hyderabad",
-                            "title": "Osmania General Hospital, Hyderabad"
-                        },
-                        {
-                            "id": "gh,hyderabad",
-                            "title": "Gandhi Hospital, Hyderabad"
-                        },
-                        {
-                            "id": "nims,hyderabad",
-                            "title": "Nizam's Institute of Medical Sciences (NIMS), Hyderabad"
-                        }
-                    ]
-                }
-            },
-            "layout": {
-                "type": "SingleColumnLayout",
-                "children": [
-                    {
-                        "type": "Form",
-                        "name": "hospital_info_form",
-                        "children": [
-                            {
-                                "type": "Dropdown",
-                                "label": "Select Hospital",
-                                "name": "hospital",
-                                "data-source": "${data.hospitals}",
-                                "required": true
-                            },
-                            {
-                                "type": "Footer",
-                                "label": "View Information",
-                                "on-click-action": {
-                                    "name": "data_exchange",
-                                    "payload": {
-                                        "hospital": "${form.hospital}"
                                     }
                                 }
                             }
@@ -1729,19 +1109,19 @@
             "data": {
                 "hospital_name": {
                     "type": "string",
-                    "__example__": "Osmania General Hospital"
+                    "__example__": "PARADIP PORT AUTHORITY HOSPITAL"
                 },
                 "address": {
                     "type": "string",
-                    "__example__": "Afzal Gunj, Hyderabad – 500012"
+                    "__example__": "Paradip Port Area, Paradip, Odisha – 754142"
                 },
                 "phone": {
                     "type": "string",
-                    "__example__": "+91-40-24600121"
+                    "__example__": "+91-6722-222041"
                 },
                 "specialties": {
                     "type": "string",
-                    "__example__": "General Medicine, Cardiology, Neurology, Orthopedics, Surgery, Psychiatry"
+                    "__example__": "General Medicine, General Surgery, Orthopedics, Gynecology & Obstetrics, Pediatrics, ENT, Ophthalmology, Cardiology, Dermatology, Dental"
                 }
             },
             "layout": {
