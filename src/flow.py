@@ -20,12 +20,11 @@ def _load(filename: str):
 
 
 _DEPARTMENTS:  list[dict]      = _load("departments.json")
-_DISTRICTS:    list[dict]      = _load("districts.json")
 _TIME_SLOTS:   list[dict]      = _load("time_slots.json")
 HOSPITAL_DATA: dict[str, dict] = _load("hospitals.json")
 OPD_INFO:      dict[str, dict] = _load("opd_info.json")
 
-_ALL_HOSPITALS = [{"id": hid, "title": h["name"]} for hid, h in HOSPITAL_DATA.items()]
+_PPA_HOSPITAL_ID = "ppa_hospital"
 
 # ─── Screen response templates ───────────────────────────────────────────────
 
@@ -38,15 +37,12 @@ SCREEN_RESPONSES = {
     "APPOINTMENT": {
         "screen": "APPOINTMENT",
         "data": {
-            "department":          _DEPARTMENTS,
-            "district":            _DISTRICTS,
-            "is_district_enabled": False,
-            "hospital":            _ALL_HOSPITALS,
-            "is_hospital_enabled": False,
-            "date":                [],
-            "is_date_enabled":     False,
-            "time":                _TIME_SLOTS,
-            "is_time_enabled":     False,
+            "department":      _DEPARTMENTS,
+            "hospital":        _PPA_HOSPITAL_ID,
+            "date":            [],
+            "is_date_enabled": False,
+            "time":            _TIME_SLOTS,
+            "is_time_enabled": False,
         },
     },
 
@@ -54,26 +50,24 @@ SCREEN_RESPONSES = {
         "screen": "DETAILS",
         "data": {
             "department": "cardiology",
-            "district": "hyderabad",
-            "hospital": "ogh",
-            "date": "2026-06-06",
-            "time": "10:30",
+            "hospital":   "ppa_hospital",
+            "date":       "2026-06-06",
+            "time":       "10:30",
         },
     },
 
     "SUMMARY": {
         "screen": "SUMMARY",
         "data": {
-            "appointment": "Cardiology at Osmania General Hospital, Hyderabad\nSat Jun 06 2026 at 10:30 AM.",
-            "details": "Name: John Doe\nEmail: john@example.com\nPhone: 123456789",
-            "department": "cardiology",
-            "district": "hyderabad",
-            "hospital": "ogh",
-            "date": "2026-06-06",
-            "time": "10:30",
-            "name": "John Doe",
-            "email": "john@example.com",
-            "phone": "123456789",
+            "appointment": "Cardiology at PPA Hospital\nSat Jun 06 2026 at 10:30 AM.",
+            "details":     "Name: John Doe\nEmail: john@example.com\nPhone: 123456789",
+            "department":  "cardiology",
+            "hospital":    "ppa_hospital",
+            "date":        "2026-06-06",
+            "time":        "10:30",
+            "name":        "John Doe",
+            "email":       "john@example.com",
+            "phone":       "123456789",
             "more_details": "",
         },
     },
@@ -86,9 +80,7 @@ SCREEN_RESPONSES = {
     "DOCTOR_OPD": {
         "screen": "DOCTOR_OPD",
         "data": {
-            "department":          _DEPARTMENTS,
-            "hospital":            _ALL_HOSPITALS,
-            "is_hospital_enabled": False,
+            "department": _DEPARTMENTS,
         },
     },
 
@@ -117,25 +109,6 @@ SCREEN_RESPONSES = {
     "AI_ASSISTANCE": {
         "screen": "AI_ASSISTANCE",
         "data": {},
-    },
-
-    "AI_RESPONSE": {
-        "screen": "AI_RESPONSE",
-        "data": {
-            "ai_response": (
-                "Thank you for sharing your health query.\n\n"
-                "Please consult a qualified doctor for medical advice.\n"
-                "This is general health information only.\n\n"
-                "⚠️ Disclaimer: This is not a substitute for professional medical advice."
-            ),
-        },
-    },
-
-    "HOSPITAL_INFO": {
-        "screen": "HOSPITAL_INFO",
-        "data": {
-            "hospitals": [],
-        },
     },
 
     "EMERGENCY_VIDEOS": {
@@ -255,19 +228,21 @@ def _get_filtered_time_slots(selected_date_str: str | None) -> list[dict[str, st
     return filtered_slots
 
 
-def _get_hospital_list_for_info() -> list[dict]:
-    return [
-        {
-            "id": f"{hid},{hdata['district_id']}",
-            "title": f"{hdata['name']}, {hdata['district']}",
-        }
-        for hid, hdata in HOSPITAL_DATA.items()
-    ]
+def _ppa_hospital_detail() -> dict[str, Any]:
+    hosp = HOSPITAL_DATA[_PPA_HOSPITAL_ID]
+    return {
+        **SCREEN_RESPONSES["HOSPITAL_DETAIL"],
+        "data": {
+            "hospital_name": hosp["name"],
+            "address":       hosp["address"],
+            "phone":         hosp["phone"],
+            "specialties":   hosp["specialties"],
+        },
+    }
 
 
 async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
-    SCREEN_RESPONSES["APPOINTMENT"]["data"]["date"] = _get_next_7_days()
-
+    dates = _get_next_7_days()
     screen = decrypted_body.get("screen")
     data = decrypted_body.get("data") or {}
     action = decrypted_body.get("action")
@@ -294,12 +269,11 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                     **SCREEN_RESPONSES["APPOINTMENT"],
                     "data": {
                         **SCREEN_RESPONSES["APPOINTMENT"]["data"],
-                        "is_district_enabled": True,
-                        "is_hospital_enabled": True,
+                        "hospital":        _PPA_HOSPITAL_ID,
+                        "date":            dates,
                         "is_date_enabled": False,
                         "is_time_enabled": False,
-                        "hospital": _ALL_HOSPITALS,
-                        "time": _get_filtered_time_slots(None),
+                        "time":            _get_filtered_time_slots(None),
                     },
                 }
 
@@ -318,13 +292,9 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
             if service == "AI_ASSISTANCE":
                 return SCREEN_RESPONSES["AI_ASSISTANCE"]
 
+            # Jump directly to PPA Hospital detail — no selection needed.
             if service == "HOSPITAL_INFO":
-                return {
-                    **SCREEN_RESPONSES["HOSPITAL_INFO"],
-                    "data": {
-                        "hospitals": _get_hospital_list_for_info(),
-                    },
-                }
+                return _ppa_hospital_detail()
 
             if service == "EMERGENCY_VIDEOS":
                 return SCREEN_RESPONSES["EMERGENCY_VIDEOS"]
@@ -334,64 +304,41 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
 
         # ── APPOINTMENT SCREEN ────────────────────────────────────────────
         if screen == "APPOINTMENT":
-
-            district_id = data.get("district") or data.get("location")
-            hospital_selected = bool(data.get("hospital"))
+            department_selected = bool(data.get("department"))
             date_selected = bool(data.get("date"))
-
-            if district_id:
-                filtered_hospitals = [
-                    {"id": hid, "title": hdata["name"]}
-                    for hid, hdata in HOSPITAL_DATA.items()
-                    if hdata["district_id"] == district_id
-                ]
-            else:
-                filtered_hospitals = _ALL_HOSPITALS
 
             return {
                 **SCREEN_RESPONSES["APPOINTMENT"],
                 "data": {
                     **SCREEN_RESPONSES["APPOINTMENT"]["data"],
-                    "is_district_enabled": True,
-                    "is_hospital_enabled": True,
-                    "is_date_enabled": hospital_selected,
-                    "is_time_enabled": hospital_selected and date_selected,
-                    "district": _DISTRICTS,
-                    "hospital": filtered_hospitals,
-                    "date": SCREEN_RESPONSES["APPOINTMENT"]["data"]["date"],
-                    "time": _get_filtered_time_slots(data.get("date")),
+                    "hospital":        _PPA_HOSPITAL_ID,
+                    "is_date_enabled": department_selected,
+                    "is_time_enabled": department_selected and date_selected,
+                    "date":            dates,
+                    "time":            _get_filtered_time_slots(data.get("date")),
                 },
             }
 
         # ── DETAILS SCREEN ────────────────────────────────────────────────
         if screen == "DETAILS":
-
+            dept_id = data.get("department", "")
             department_name = next(
-                dept["title"]
-                for dept in _DEPARTMENTS
-                if dept["id"] == data.get("department")
-            )
-
-            district_name = next(
-                district["title"]
-                for district in _DISTRICTS
-                if district["id"] == data.get("district")
+                (dept["title"] for dept in _DEPARTMENTS if dept["id"] == dept_id),
+                dept_id.replace("_", " ").title()
             )
 
             hospital_name = (
                 HOSPITAL_DATA.get(data.get("hospital", ""), {}).get("name")
-                or data.get("hospital", "Unknown")
+                or "PPA Hospital"
             )
 
             date_name = next(
-                date["title"]
-                for date in SCREEN_RESPONSES["APPOINTMENT"]["data"]["date"]
-                if date["id"] == data.get("date")
+                (d["title"] for d in dates if d["id"] == data.get("date")),
+                data.get("date", "Unknown")
             )
 
             appointment = (
                 f"{department_name}\n"
-                f"District: {district_name}\n"
                 f"Hospital: {hospital_name}\n"
                 f"{date_name} at {data.get('time')}"
             )
@@ -430,12 +377,7 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
             )
             hospital_name = (
                 HOSPITAL_DATA.get(hospital_id or "", {}).get("name")
-                or hospital_id or "Unknown"
-            )
-            district_id = data.get("district")
-            district_name = next(
-                (dist["title"] for dist in _DISTRICTS if dist["id"] == district_id),
-                district_id or "Unknown"
+                or "PPA Hospital"
             )
 
             import datetime
@@ -459,14 +401,13 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                     "extension_message_response": {
                         "params": {
                             "flow_token": flow_token,
-                            "service": "appointment",
+                            "service":    "appointment",
                             "department": department_name,
-                            "hospital": hospital_name,
-                            "district": district_name,
-                            "date": formatted_date,
-                            "time": time_name,
-                            "name": data.get("name", ""),
-                            "phone": data.get("phone", ""),
+                            "hospital":   hospital_name,
+                            "date":       formatted_date,
+                            "time":       time_name,
+                            "name":       data.get("name", ""),
+                            "phone":      data.get("phone", ""),
                         }
                     }
                 },
@@ -476,19 +417,9 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
         if screen == "DOCTOR_OPD":
             trigger = data.get("trigger")
 
-            if trigger == "opd_department_selected":
-                dept_selected = bool(data.get("department"))
-                return {
-                    **SCREEN_RESPONSES["DOCTOR_OPD"],
-                    "data": {
-                        **SCREEN_RESPONSES["DOCTOR_OPD"]["data"],
-                        "is_hospital_enabled": dept_selected,
-                    },
-                }
-
             if trigger == "find_doctors":
                 department_id = data.get("department", "")
-                hospital_id = data.get("hospital", "")
+                hospital_id = _PPA_HOSPITAL_ID
                 brief_text = _build_opd_result_brief(department_id, hospital_id)
                 return {
                     **SCREEN_RESPONSES["DOCTOR_OPD_RESULT"],
@@ -538,7 +469,6 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                 f"  • Platelets: 2.5 Lac /µL   ✅ Normal\n\n"
                 f"Blood Sugar (Fasting)\n"
                 f"  • Glucose: 98 mg/dL         ✅ Normal\n\n"
-                f"For complete reports, visit your nearest hospital."
             )
 
             return {
@@ -563,31 +493,6 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                 },
             }
 
-        # ── HOSPITAL_INFO SCREEN ──────────────────────────────────────────
-        if screen == "HOSPITAL_INFO":
-            hospital_key = data.get("hospital", "")
-            hospital_id = hospital_key.split(",", 1)[0]
-            hosp = HOSPITAL_DATA.get(hospital_id)
-            if hosp:
-                return {
-                    **SCREEN_RESPONSES["HOSPITAL_DETAIL"],
-                    "data": {
-                        "hospital_name": hosp["name"],
-                        "address": hosp["address"],
-                        "phone": hosp["phone"],
-                        "specialties": hosp["specialties"],
-                    },
-                }
-            return {
-                **SCREEN_RESPONSES["HOSPITAL_DETAIL"],
-                "data": {
-                    "hospital_name": "Hospital Not Found",
-                    "address": "N/A",
-                    "phone": "N/A",
-                    "specialties": "N/A",
-                },
-            }
-
         # ── EMERGENCY_VIDEOS SCREEN ───────────────────────────────────────
         if screen == "EMERGENCY_VIDEOS":
             return {
@@ -596,7 +501,7 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                     "extension_message_response": {
                         "params": {
                             "flow_token": flow_token,
-                            "service": "emergency_video",
+                            "service":  "emergency_video",
                             "video_id": data.get("video_id", ""),
                         }
                     }
@@ -637,9 +542,9 @@ async def get_next_screen(decrypted_body: dict[str, Any]) -> dict[str, Any]:
                 "data": {
                     "extension_message_response": {
                         "params": {
-                            "flow_token": flow_token,
-                            "service": "ai",
-                            "ai_response": ai_response,
+                            "flow_token":   flow_token,
+                            "service":      "ai",
+                            "ai_response":  ai_response,
                         }
                     }
                 },
