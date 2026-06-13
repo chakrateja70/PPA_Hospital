@@ -56,7 +56,7 @@ def get_first_message(payload: dict) -> dict:
 # Replace the URLs below with the actual S3 / CDN links for each guide.
 EMERGENCY_VIDEO_LIBRARY: dict[str, dict[str, str]] = {
     "cpr": {
-        "url":     "https://firebasestorage.googleapis.com/v0/b/quantumads-verify.firebasestorage.app/o/VID-20260607-WA0001.mp4?alt=media&token=67bc15ff-d426-46da-9b6d-4c3a08ededc3",
+        "url":     "https://firebasestorage.googleapis.com/v0/b/quantumads-verify.firebasestorage.app/o/teja%2FVID-20260613-WA0002.mp4?alt=media&token=754575ef-8819-4d08-b332-0c66a4884d60",
         "caption": "CPR – 30 chest compressions + 2 rescue breaths. Call 108.",
     },
     "snake_bite": {
@@ -80,7 +80,7 @@ EMERGENCY_VIDEO_LIBRARY: dict[str, dict[str, str]] = {
         "caption": "Bites & Stings – Clean the wound, remove stinger if visible, watch for allergic reaction.",
     },
     "choking": {
-        "url":     "https://firebasestorage.googleapis.com/v0/b/quantumads-verify.firebasestorage.app/o/teja%2FVID-20260607-WA0002.mp4?alt=media&token=d734219f-0180-44e8-a043-613f21be22aa",
+        "url":     "https://firebasestorage.googleapis.com/v0/b/quantumads-verify.firebasestorage.app/o/teja%2FVID-20260613-WA0001.mp4?alt=media&token=d722bc73-fa0e-48b7-b5cc-c2f36ff6808c",
         "caption": "Choking – 5 back blows + 5 abdominal thrusts. Call 108 if not resolved.",
     },
 }
@@ -177,6 +177,11 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
 
                 # ── Text message → trigger the Flow ──────────────────────
                 if message.get("type") == "text":
+                    welcome_body = (
+                        "🙏 ନମସ୍କାର! Welcome to Paradip Port Authority Hospital's` Citizen Helper on WhatsApp!\n\n"
+                        "We're here to make your healthcare journey easier from booking doctor appointments to accessing lab reports and health guidance.\n\n"
+                        "Choose a service below to get started."
+                    )
                     await client.post(
                         graph_url,
                         headers=headers,
@@ -186,11 +191,10 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                             "type": "interactive",
                             "interactive": {
                                 "type": "flow",
-                                "header": {"type": "text", "text": "👋 I'm PPA Virtual Assistant"},
+                                # TODO: replace with the hosted PPA logo URL (placeholder uses the THS logo).
+                                "header": {"type": "image", "image": {"link": "https://firebasestorage.googleapis.com/v0/b/quantumads-verify.firebasestorage.app/o/teja%2FPPA_LOGO.jpeg?alt=media&token=660d04a2-62e1-4b9e-a45b-fdf9f65302d6"}},
                                 "body": {
-                                    "text": (
-                                        "I can assist you with booking appointments, finding doctors, accessing lab reports, and providing AI-powered health guidance."
-                                    )
+                                    "text": welcome_body
                                 },
                                 "footer": {"text": "Tap below to get started"},
                                 "action": {
@@ -261,7 +265,7 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
                     elif service == "lab":
                         confirm_body = (
                             "✅ Lab Report Ready!\n"
-                            "Your lab report has been successfully generated. Visit your nearest hospital or contact the lab to collect your report."
+                            "Your lab report has been successfully generated. contact the lab to collect your report."
                         )
 
                     elif service == "ai":
@@ -365,4 +369,4 @@ async def webhook_receiver(request: Request, background_tasks: BackgroundTasks) 
 
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", reload=True)

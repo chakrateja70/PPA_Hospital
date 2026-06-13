@@ -48,7 +48,7 @@
                             {
                                 "id": "appointment_booking",
                                 "main-content": {
-                                    "title": "Appointment Booking",
+                                    "title": "📅 Appointment Booking",
                                     "metadata": "Book an appointment with a doctor"
                                 },
                                 "on-click-action": {
@@ -61,7 +61,7 @@
                             {
                                 "id": "doctor_opd",
                                 "main-content": {
-                                    "title": "Doctor & OPD Information",
+                                    "title": "🩺 Doctor & OPD Information",
                                     "metadata": "Find doctors and OPD timings"
                                 },
                                 "on-click-action": {
@@ -74,7 +74,7 @@
                             {
                                 "id": "lab_reports",
                                 "main-content": {
-                                    "title": "Lab Reports",
+                                    "title": "🧪 Lab Reports",
                                     "metadata": "Access your diagnostic lab reports"
                                 },
                                 "on-click-action": {
@@ -87,7 +87,7 @@
                             {
                                 "id": "ai_assistance",
                                 "main-content": {
-                                    "title": "AI Assistance",
+                                    "title": "🤖 AI Assistance",
                                     "metadata": "Get AI-powered health guidance"
                                 },
                                 "on-click-action": {
@@ -100,7 +100,7 @@
                             {
                                 "id": "hospital_info",
                                 "main-content": {
-                                    "title": "PPA Hospital Information",
+                                    "title": "🏥 PPA Hospital Information",
                                     "metadata": "Find address, phone & specialties of PPA Hospital"
                                 },
                                 "on-click-action": {
@@ -113,7 +113,7 @@
                             {
                                 "id": "emergency_videos",
                                 "main-content": {
-                                    "title": "Emergency Videos",
+                                    "title": "🚑 Emergency Videos",
                                     "metadata": "Watch first-aid guides for emergencies"
                                 },
                                 "on-click-action": {
@@ -126,7 +126,7 @@
                             {
                                 "id": "audio_guidance",
                                 "main-content": {
-                                    "title": "Audio Guidance",
+                                    "title": "🎤 Audio Guidance",
                                     "metadata": "Ask your health query by voice in any language"
                                 },
                                 "on-click-action": {
@@ -474,7 +474,7 @@
                         "children": [
                             {
                                 "type": "Dropdown",
-                                "label": "Department",
+                                "label": "🩺 Department",
                                 "name": "department",
                                 "data-source": "${data.department}",
                                 "required": true,
@@ -492,7 +492,7 @@
                             },
                             {
                                 "type": "Dropdown",
-                                "label": "Date",
+                                "label": "📅 Date",
                                 "name": "date",
                                 "data-source": "${data.date}",
                                 "required": "${data.is_date_enabled}",
@@ -509,7 +509,7 @@
                             },
                             {
                                 "type": "Dropdown",
-                                "label": "Time",
+                                "label": "⏰ Time",
                                 "name": "time",
                                 "data-source": "${data.time}",
                                 "required": "${data.is_time_enabled}",
@@ -567,27 +567,27 @@
                         "children": [
                             {
                                 "type": "TextInput",
-                                "label": "Name",
+                                "label": "👤 Name",
                                 "name": "name",
                                 "required": true
                             },
                             {
                                 "type": "TextInput",
-                                "label": "Email",
+                                "label": "📧 Email",
                                 "name": "email",
                                 "input-type": "email",
                                 "required": false
                             },
                             {
                                 "type": "TextInput",
-                                "label": "Phone",
+                                "label": "📞 Phone",
                                 "name": "phone",
                                 "input-type": "phone",
                                 "required": true
                             },
                             {
                                 "type": "TextArea",
-                                "label": "Further details",
+                                "label": "📝 Further details",
                                 "name": "more_details",
                                 "helper-text": "More details about your visit",
                                 "required": false
@@ -669,7 +669,7 @@
                         "children": [
                             {
                                 "type": "TextHeading",
-                                "text": "Appointment"
+                                "text": "📅 Appointment"
                             },
                             {
                                 "type": "TextBody",
@@ -677,7 +677,7 @@
                             },
                             {
                                 "type": "TextHeading",
-                                "text": "Details"
+                                "text": "👤 Details"
                             },
                             {
                                 "type": "TextBody",
@@ -727,7 +727,7 @@
                 "children": [
                     {
                         "type": "TextHeading",
-                        "text": "Our Terms"
+                        "text": "📋 Our Terms"
                     },
                     {
                         "type": "TextBody",
@@ -938,7 +938,7 @@
                         "children": [
                             {
                                 "type": "TextHeading",
-                                "text": "Doctor & OPD Information"
+                                "text": "🩺 Doctor & OPD Information"
                             },
                             {
                                 "type": "TextBody",
@@ -972,7 +972,7 @@
                         "children": [
                             {
                                 "type": "TextInput",
-                                "label": "Patient ID / Registration Number",
+                                "label": "🆔 Patient ID / Registration Number",
                                 "name": "patient_id",
                                 "required": true,
                                 "helper-text": "Enter your hospital registration number"
@@ -1024,7 +1024,7 @@
                         "children": [
                             {
                                 "type": "TextHeading",
-                                "text": "Lab Report"
+                                "text": "🧪 Lab Report"
                             },
                             {
                                 "type": "TextBody",
@@ -1059,7 +1059,7 @@
                         "children": [
                             {
                                 "type": "TextSubheading",
-                                "text": "Describe your symptoms or ask a health question"
+                                "text": "🤖 Describe your symptoms or ask a health question"
                             },
                             {
                                 "type": "TextArea",
